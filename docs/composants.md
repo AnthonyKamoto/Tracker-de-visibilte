@@ -100,7 +100,7 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 **Role :** Sert les pages HTML du projet via le moteur de gabarits Jinja2 integre a Flask.
 
-**Dependances :** Flask (Blueprint, `render_template`), gabarits HTML dans `gabarits/`.
+**Dependances :** Flask (Blueprint, `render_template`), templates HTML dans `templates/`.
 
 **Routes principales :**
 
@@ -125,7 +125,7 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ## Front-end (JavaScript)
 
-### `statique/js/informations_contexte.js` — Detection du contexte utilisateur
+### `static/js/informations_contexte.js` — Detection du contexte utilisateur
 
 **Role :** Module IIFE (Immediately Invoked Function Expression) qui detecte automatiquement les informations contextuelles du visiteur : type d'appareil (mobile, tablette, ordinateur), navigateur utilise et dimensions de l'ecran.
 
@@ -139,7 +139,7 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ---
 
-### `statique/js/observateur_visibilite.js` — Observation de la visibilite des elements
+### `static/js/observateur_visibilite.js` — Observation de la visibilite des elements
 
 **Role :** Module IIFE qui utilise l'API `IntersectionObserver` pour surveiller la visibilite des elements de contenu dans la fenetre du navigateur. Il mesure le temps d'exposition de chaque element et emet des battements de coeur (heartbeat) reguliers.
 
@@ -153,7 +153,7 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ---
 
-### `statique/js/collecteur_donnees.js` — Collecte et envoi des donnees
+### `static/js/collecteur_donnees.js` — Collecte et envoi des donnees
 
 **Role :** Module IIFE qui gere un tampon (buffer) d'evenements en memoire, les envoie par lots au serveur via des requetes HTTP, et utilise `navigator.sendBeacon` lors de l'evenement `beforeunload` pour garantir l'envoi des derniers evenements avant la fermeture de la page.
 
@@ -167,7 +167,7 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ---
 
-### `statique/js/tableau_de_bord.js` — Script du tableau de bord
+### `static/js/tableau_de_bord.js` — Script du tableau de bord
 
 **Role :** Script dedie a la page du tableau de bord. Il appelle les quatre points de terminaison statistiques en parallele, puis instancie cinq graphiques Chart.js pour visualiser les resultats.
 
@@ -181,13 +181,13 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ---
 
-## Pages HTML (Gabarits Jinja2)
+## Pages HTML (Templates Jinja2)
 
-### `gabarits/page_demo.html` — Page de demonstration
+### `templates/page_demo.html` — Page de demonstration
 
 **Role :** Page HTML scrollable contenant sept elements de contenu surveilles par l'observateur de visibilite. Elle sert a generer des donnees de visibilite pour tester et alimenter le systeme.
 
-**Dependances :** `statique/css/style_demo.css`, `statique/js/informations_contexte.js`, `statique/js/observateur_visibilite.js`, `statique/js/collecteur_donnees.js`.
+**Dependances :** `static/css/style_demo.css`, `static/js/informations_contexte.js`, `static/js/observateur_visibilite.js`, `static/js/collecteur_donnees.js`.
 
 **Contenus surveilles (7 elements) :**
 
@@ -197,11 +197,11 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ---
 
-### `gabarits/tableau_de_bord.html` — Tableau de bord
+### `templates/tableau_de_bord.html` — Tableau de bord
 
 **Role :** Page HTML du tableau de bord affichant les statistiques collectees sous forme de cartes de resume, de graphiques interactifs, d'un tableau recapitulatif et d'un filtre par dates.
 
-**Dependances :** `statique/css/style_tableau_de_bord.css`, `statique/js/tableau_de_bord.js`, bibliotheque Chart.js (chargee via CDN).
+**Dependances :** `static/css/style_tableau_de_bord.css`, `static/js/tableau_de_bord.js`, bibliotheque Chart.js (chargee via CDN).
 
 **Elements de l'interface :**
 
@@ -214,7 +214,7 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ## Feuilles de style (CSS)
 
-### `statique/css/style_demo.css` — Style de la page de demonstration
+### `static/css/style_demo.css` — Style de la page de demonstration
 
 **Role :** Feuille de style dediee a la page de demonstration. Definit la mise en forme de l'en-tete fixe, des sections de contenu en cartes et de l'adaptation responsive aux differentes tailles d'ecran.
 
@@ -228,7 +228,7 @@ Ce document decrit chaque composant du projet de collecte et d'analyse comportem
 
 ---
 
-### `statique/css/style_tableau_de_bord.css` — Style du tableau de bord
+### `static/css/style_tableau_de_bord.css` — Style du tableau de bord
 
 **Role :** Feuille de style dediee au tableau de bord. Definit la grille de mise en page, l'apparence des cartes de resume, des conteneurs de graphiques et du tableau de donnees.
 

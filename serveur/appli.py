@@ -18,9 +18,9 @@ def creer_application():
     """Cree et configure l'application Flask."""
     appli = Flask(
         __name__,
-        template_folder=os.path.join(REPERTOIRE_BASE, 'gabarits'),
-        static_folder=os.path.join(REPERTOIRE_BASE, 'statique'),
-        static_url_path='/statique'
+        template_folder=os.path.join(REPERTOIRE_BASE, 'templates'),
+        static_folder=os.path.join(REPERTOIRE_BASE, 'static'),
+        static_url_path='/static'
     )
 
     # Initialiser la base de donnees au demarrage

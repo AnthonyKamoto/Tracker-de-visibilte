@@ -66,10 +66,10 @@ Projet_N4_CCC_Anthony_Kamoto/
             pages.py                   # Routes des pages HTML
         utilitaires/
             analyseur.py               # Calcul des statistiques
-    gabarits/
+    templates/
         page_demo.html                 # Page de demonstration
         tableau_de_bord.html           # Tableau de bord
-    statique/
+    static/
         css/
             style_demo.css             # Style de la page demo
             style_tableau_de_bord.css  # Style du tableau de bord

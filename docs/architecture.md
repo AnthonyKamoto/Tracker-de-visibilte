@@ -223,11 +223,11 @@ Projet_N4_CCC_Anthony_Kamoto/
 |       |-- __init__.py
 |       |-- analyseur.py            # Calculs statistiques (agregations SQL)
 |
-|-- gabarits/                       # Templates HTML Jinja2
+|-- templates/                       # Templates HTML Jinja2
 |   |-- page_demo.html              # Page de demonstration avec contenus observes
 |   |-- tableau_de_bord.html        # Tableau de bord des statistiques
 |
-|-- statique/                       # Fichiers statiques (CSS, JS)
+|-- static/                          # Fichiers statiques (CSS, JS)
 |   |-- css/
 |   |   |-- style_demo.css          # Styles de la page de demo
 |   |   |-- style_tableau_de_bord.css  # Styles du tableau de bord

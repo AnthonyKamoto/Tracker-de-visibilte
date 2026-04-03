@@ -101,8 +101,8 @@ Projet_N4_CCC_Anthony_Kamoto/
         modeles/                  # Modeles de donnees (session, evenement)
         routes/                   # Routes API (collecte, statistiques, pages)
         utilitaires/              # Analyseur de statistiques
-    gabarits/                     # Templates HTML (Jinja2)
-    statique/
+    templates/                     # Templates HTML (Jinja2)
+    static/
         css/                      # Feuilles de style
         js/                       # Scripts front-end (observateur, collecteur)
     donnees/                      # Base de donnees SQLite (cree au lancement)
