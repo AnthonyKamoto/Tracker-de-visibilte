@@ -4,7 +4,6 @@ Tests unitaires pour le module base_de_donnees.
 
 import os
 import sys
-import sqlite3
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -14,14 +13,10 @@ from serveur.config import CHEMIN_BDD
 
 
 @pytest.fixture(autouse=True)
-def bdd_propre():
-    """Supprime la BDD avant chaque test pour repartir propre."""
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
+def bdd_propre(bdd_temporaire):
+    """Initialise la BDD temporaire avant chaque test."""
     initialiser_bdd()
     yield
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
 
 
 def test_creation_fichier_bdd():

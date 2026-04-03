@@ -9,14 +9,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pytest
 from serveur.appli import creer_application
-from serveur.config import CHEMIN_BDD
 
 
 @pytest.fixture
-def client():
+def client(bdd_temporaire):
     """Client de test Flask avec des donnees de demo."""
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
     appli = creer_application()
     appli.config['TESTING'] = True
     with appli.test_client() as c:
@@ -51,8 +48,6 @@ def client():
             ]
         })
         yield c
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
 
 
 def test_stats_contenus(client):
@@ -108,10 +103,8 @@ def test_stats_navigateurs(client):
     assert len(donnees['donnees']) == 2  # Chrome et Safari
 
 
-def test_stats_bdd_vide():
+def test_stats_bdd_vide(bdd_temporaire):
     """Les stats avec une BDD vide doivent retourner des listes vides."""
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
     appli = creer_application()
     appli.config['TESTING'] = True
     with appli.test_client() as c:
@@ -119,5 +112,3 @@ def test_stats_bdd_vide():
         assert reponse.status_code == 200
         donnees = reponse.get_json()
         assert donnees['donnees'] == []
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)

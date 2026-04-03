@@ -109,8 +109,9 @@ Projet_N4_CCC_Anthony_Kamoto/
         test_analyseur.py              # Tests de l'analyseur (6 tests)
     docs/
         base_de_donnees.md             # Schema de la BDD
+        architecture.md                # Architecture du systeme
+        composants.md                  # Description des composants
         guide_installation.md          # Guide d'installation
-        scenarios_de_test.md           # Scenarios de test
         rapport_synthese.md            # Rapport de synthese
     requirements.txt                   # Dependances Python
 ```

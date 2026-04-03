@@ -10,21 +10,15 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pytest
 from serveur.appli import creer_application
-from serveur.config import CHEMIN_BDD
-from serveur.base_de_donnees import initialiser_bdd
 
 
 @pytest.fixture
-def client():
+def client(bdd_temporaire):
     """Client de test Flask."""
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
     appli = creer_application()
     appli.config['TESTING'] = True
     with appli.test_client() as client:
         yield client
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
 
 
 def test_creer_session(client):

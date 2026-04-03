@@ -136,9 +136,10 @@ const ObservateurVisibilite = (function () {
         setInterval(envoyerHeartbeat, 5000);
 
         // Envoyer les données restantes avant fermeture
+        // Note : on envoie le heartbeat mais on laisse le collecteur
+        // gérer l'envoi via sendBeacon (seul mécanisme fiable dans beforeunload)
         window.addEventListener('beforeunload', function () {
             envoyerHeartbeat();
-            CollecteurDonnees.envoyerLot();
         });
     }
 

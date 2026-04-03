@@ -12,10 +12,10 @@ const CollecteurDonnees = (function () {
     let tampon = [];
 
     // Taille maximale du tampon avant envoi automatique
-    const TAILLE_MAX_TAMPON = 10;
+    const TAILLE_MAX_TAMPON = 5;
 
-    // Intervalle d'envoi automatique (5 secondes)
-    const INTERVALLE_ENVOI_MS = 5000;
+    // Intervalle d'envoi automatique (3 secondes)
+    const INTERVALLE_ENVOI_MS = 3000;
 
     // URL de base de l'API
     const URL_API = '';
@@ -88,20 +88,23 @@ const CollecteurDonnees = (function () {
 
     /**
      * Envoie les données restantes via sendBeacon (pour la fermeture de page).
+     * sendBeacon est le seul mécanisme fiable dans beforeunload/visibilitychange.
      */
     function envoyerAvantFermeture() {
         if (tampon.length === 0) return;
 
-        const donnees = JSON.stringify({
-            id_session: idSession,
-            evenements: tampon
-        });
-
-        navigator.sendBeacon(
+        var succes = navigator.sendBeacon(
             URL_API + '/api/evenements',
-            new Blob([donnees], { type: 'application/json' })
+            new Blob([JSON.stringify({
+                id_session: idSession,
+                evenements: tampon
+            })], { type: 'application/json' })
         );
-        tampon = [];
+
+        if (succes) {
+            console.log('[CCC Tracking] sendBeacon envoyé :', tampon.length, 'événements');
+            tampon = [];
+        }
     }
 
     /**
@@ -110,13 +113,13 @@ const CollecteurDonnees = (function () {
     function initialiser() {
         creerSession();
 
-        // Envoi périodique toutes les 5 secondes
+        // Envoi périodique toutes les 3 secondes
         setInterval(envoyerLot, INTERVALLE_ENVOI_MS);
 
         // Envoi des données restantes à la fermeture de la page
         window.addEventListener('beforeunload', envoyerAvantFermeture);
 
-        // Envoi lorsque l'onglet devient masqué
+        // Envoi lorsque l'onglet devient masqué (changement d'onglet, alt-tab, etc.)
         document.addEventListener('visibilitychange', function () {
             if (document.visibilityState === 'hidden') {
                 envoyerAvantFermeture();

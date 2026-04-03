@@ -104,20 +104,6 @@ Le prototype est **fonctionnel au niveau 2** (application complete avec interfac
 
 ---
 
-## Pistes d'amelioration
-
-| Amelioration                    | Description                                                                  | Priorite |
-|---------------------------------|------------------------------------------------------------------------------|----------|
-| Migration vers PostgreSQL       | Remplacer SQLite par PostgreSQL pour supporter les acces concurrents en production | Haute    |
-| Authentification                | Proteger le tableau de bord et l'API avec un systeme d'authentification (JWT ou session) | Haute    |
-| Export CSV                      | Permettre l'export des donnees collectees au format CSV depuis le tableau de bord | Moyenne  |
-| Tests end-to-end (E2E)          | Ajouter des tests Selenium ou Playwright pour automatiser les scenarios de test manuels | Moyenne  |
-| Pagination des resultats        | Paginer les reponses de l'API pour gerer de grands volumes de donnees         | Moyenne  |
-| Temps reel (WebSocket)          | Mettre a jour le tableau de bord en temps reel via des WebSockets             | Basse    |
-| Conteneurisation (Docker)       | Fournir un Dockerfile pour simplifier le deploiement                          | Basse    |
-
----
-
 ## Conclusion
 
-Ce projet demontre la faisabilite d'un systeme de mesure de visibilite de contenus Web, du front-end au stockage en base de donnees, avec restitution graphique. Le prototype couvre l'ensemble du flux de donnees : detection par IntersectionObserver, collecte via API REST, stockage SQLite et affichage sur un tableau de bord interactif. Les 27 tests unitaires garantissent la fiabilite des composants principaux. Le systeme est pret a evoluer vers une solution de production en integrant les ameliorations identifiees.
+Ce projet demontre la faisabilite d'un systeme de mesure de visibilite de contenus Web, du front-end au stockage en base de donnees, avec restitution graphique. Le prototype couvre l'ensemble du flux de donnees : detection par IntersectionObserver, collecte via API REST, stockage SQLite et affichage sur un tableau de bord interactif. Les 27 tests unitaires garantissent la fiabilite des composants principaux.

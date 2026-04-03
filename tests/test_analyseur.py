@@ -8,7 +8,6 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pytest
-from serveur.config import CHEMIN_BDD
 from serveur.base_de_donnees import initialiser_bdd, obtenir_connexion
 from serveur.utilitaires.analyseur import (
     calculer_statistiques_contenus,
@@ -20,10 +19,8 @@ from serveur.utilitaires.analyseur import (
 
 
 @pytest.fixture(autouse=True)
-def bdd_avec_donnees():
+def bdd_avec_donnees(bdd_temporaire):
     """Cree une BDD avec des donnees de test."""
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
     initialiser_bdd()
     connexion = obtenir_connexion()
     c = connexion.cursor()
@@ -35,8 +32,6 @@ def bdd_avec_donnees():
     connexion.commit()
     connexion.close()
     yield
-    if os.path.exists(CHEMIN_BDD):
-        os.remove(CHEMIN_BDD)
 
 
 def test_statistiques_tous_contenus():

@@ -2,6 +2,8 @@
 Routes API pour la collecte des données de visibilité.
 """
 
+import json
+
 from flask import Blueprint, request, jsonify
 from serveur.modeles.session import creer_session, obtenir_session
 from serveur.modeles.evenement import enregistrer_lot_evenements
@@ -41,7 +43,6 @@ def enregistrer_evenements():
     # Gérer aussi les données envoyées via sendBeacon (Content-Type peut être text/plain)
     if not donnees:
         try:
-            import json
             donnees = json.loads(request.get_data(as_text=True))
         except Exception:
             return jsonify({'succes': False, 'erreur': 'Données JSON requises'}), 400

@@ -33,8 +33,8 @@ Les trois couches sont les suivantes :
 |               v                             v                 |
 |          +----+-----------------------------+------+          |
 |          |       CollecteurDonnees                 |          |
-|          | - tampon (max 10 evenements)             |          |
-|          | - envoi periodique (5 s)                 |          |
+|          | - tampon (max 5 evenements)              |          |
+|          | - envoi periodique (3 s)                 |          |
 |          | - fetch() / sendBeacon()                 |          |
 |          +--------------------+--------------------+          |
 +-------------------------------|-------------------------------+
@@ -122,10 +122,10 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 
 4. **Envoi par lots** -- Le tampon est vide automatiquement selon deux
    mecanismes :
-   - **Seuil de taille** : des que le tampon atteint 10 evenements, un envoi
+   - **Seuil de taille** : des que le tampon atteint 5 evenements, un envoi
      `fetch POST /api/evenements` est declenche.
-   - **Intervalle** : toutes les 5 secondes, le tampon est envoye meme s'il
-     contient moins de 10 evenements.
+   - **Intervalle** : toutes les 3 secondes, le tampon est envoye meme s'il
+     contient moins de 5 evenements.
 
 5. **Fermeture de page** -- A l'evenement `beforeunload` ou lorsque l'onglet
    devient masque (`visibilitychange`), les evenements restants sont envoyes via

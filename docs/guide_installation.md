@@ -151,16 +151,3 @@ Projet_N4_CCC_Anthony_Kamoto/
     requirements.txt              # Dependances Python
 ```
 
----
-
-## Problemes courants
-
-| Probleme                        | OS       | Solution                                                      |
-|---------------------------------|----------|---------------------------------------------------------------|
-| `ModuleNotFoundError: flask`    | Tous     | Verifier que le venv est active, puis `pip install -r requirements.txt` |
-| `python` non reconnu            | macOS/Linux | Utiliser `python3` au lieu de `python`                     |
-| Activation PowerShell bloquee   | Windows  | `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` |
-| Port 5000 deja utilise          | Tous     | Modifier `PORT` dans `serveur/config.py`                      |
-| Port 5000 pris par AirPlay      | macOS    | Desactiver AirPlay Receiver dans Preferences systeme, ou changer le port |
-| Base de donnees verrouillee     | Tous     | Arreter les autres instances du serveur                       |
-| IntersectionObserver non supporte | Tous   | Utiliser un navigateur moderne (Chrome 51+, Firefox 55+)      |
