@@ -1,6 +1,6 @@
 # Guide d'installation et d'execution
 
-Ce guide explique comment installer, configurer et lancer le systeme de mesure de visibilite de contenus Web.
+Ce guide explique comment installer, configurer et lancer le Tracker de visibilite.
 
 ---
 
@@ -25,7 +25,24 @@ git clone <url-du-depot>
 cd Projet_N4_CCC_Anthony_Kamoto
 ```
 
-### 2. Installer les dependances Python
+### 2. Creer et activer l'environnement virtuel
+
+```bash
+python -m venv venv
+```
+
+Activation selon le terminal utilise :
+
+| Terminal     | Commande                        |
+|-------------|----------------------------------|
+| PowerShell  | `venv\Scripts\Activate.ps1`      |
+| cmd         | `venv\Scripts\activate.bat`      |
+| Bash / macOS| `source venv/bin/activate`       |
+
+> Si PowerShell bloque l'activation, executer d'abord :
+> `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+### 3. Installer les dependances Python
 
 ```bash
 pip install -r requirements.txt
@@ -35,7 +52,7 @@ Les dependances du projet sont :
 
 - **flask** : framework web leger pour le serveur HTTP et l'API REST
 
-### 3. Lancer le serveur
+### 4. Lancer le serveur
 
 ```bash
 python serveur/appli.py
@@ -94,6 +111,7 @@ tests/test_routes_statistiques.py .......               [  7 passed]
 
 ```
 Projet_N4_CCC_Anthony_Kamoto/
+    venv/                         # Environnement virtuel Python
     serveur/
         appli.py                  # Point d'entree Flask
         config.py                 # Configuration (port, chemin BDD)

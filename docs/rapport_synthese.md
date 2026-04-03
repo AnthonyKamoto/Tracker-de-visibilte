@@ -1,6 +1,6 @@
 # Rapport de synthese
 
-Projet de mesure de visibilite de contenus Web - Fondation CCC
+Tracker de visibilite - Fondation CCC
 Auteur : Anthony Kamoto
 Annee : 2026
 

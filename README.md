@@ -1,4 +1,4 @@
-# Systeme de mesure de visibilite de contenus Web
+# Tracker de visibilite
 
 Projet pedagogique realise pour la Fondation CCC (2026).
 
@@ -32,6 +32,9 @@ Ce systeme mesure la visibilite reelle des contenus affiches sur une page web : 
 
 ```bash
 git clone <url-du-depot>
+cd Projet_N4_CCC_Anthony_Kamoto
+python -m venv venv
+venv\Scripts\Activate.ps1        # PowerShell (Windows)
 pip install -r requirements.txt
 python serveur/appli.py
 ```
@@ -53,6 +56,7 @@ Le serveur demarre sur http://localhost:5000.
 
 ```
 Projet_N4_CCC_Anthony_Kamoto/
+    venv/                              # Environnement virtuel Python
     serveur/
         appli.py                       # Point d'entree Flask
         config.py                      # Configuration (port, chemin BDD)

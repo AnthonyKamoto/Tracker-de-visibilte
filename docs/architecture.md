@@ -1,4 +1,4 @@
-# Architecture du systeme de mesure de visibilite web -- Fondation CCC
+# Architecture du Tracker de visibilite -- Fondation CCC
 
 ## 1. Vue d'ensemble
 
