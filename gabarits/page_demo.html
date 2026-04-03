@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Démo — Mesure de visibilité | CCC</title>
+    <link rel="stylesheet" href="/statique/css/style_demo.css">
+</head>
+<body>
+
+    <!-- En-tête fixe -->
+    <header class="entete">
+        <h1>Mesure de visibilité — Fondation CCC</h1>
+        <a href="/tableau-de-bord" class="lien-dashboard">Tableau de bord</a>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="contenu-principal">
+
+        <div class="separateur"></div>
+
+        <!-- Bannière 1 -->
+        <section class="section-contenu">
+            <div class="etiquette">Bannière publicitaire #1</div>
+            <div class="banniere banniere-1"
+                 data-contenu-id="banniere-1"
+                 data-type-contenu="banniere">
+                Découvrez nos formations en développement web !
+            </div>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Texte d'introduction -->
+        <section class="section-contenu">
+            <div class="etiquette">Bloc de texte — Introduction</div>
+            <div class="bloc-texte"
+                 data-contenu-id="texte-intro"
+                 data-type-contenu="texte">
+                <h2>Bienvenue sur la plateforme CCC</h2>
+                <p>La Fondation Children Coding Club accompagne les jeunes dans leur
+                   apprentissage du numérique. Notre mission est de rendre la programmation
+                   accessible à tous, dès le plus jeune âge.</p>
+                <p>Cette page de démonstration permet de mesurer la visibilité réelle
+                   des contenus web. Chaque élément que vous voyez est surveillé par notre
+                   système de tracking. Scrollez pour découvrir les différents contenus.</p>
+            </div>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Image produit 1 -->
+        <section class="section-contenu">
+            <div class="etiquette">Image de contenu #1</div>
+            <div class="image-contenu image-produit-1"
+                 data-contenu-id="image-produit-1"
+                 data-type-contenu="image">
+                Image de présentation — Formation Python
+            </div>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Bannière 2 -->
+        <section class="section-contenu">
+            <div class="etiquette">Bannière publicitaire #2</div>
+            <div class="banniere banniere-2"
+                 data-contenu-id="banniere-2"
+                 data-type-contenu="banniere">
+                Inscriptions ouvertes — Session de Juin 2026
+            </div>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Article texte long -->
+        <section class="section-contenu">
+            <div class="etiquette">Bloc de texte — Article</div>
+            <div class="bloc-texte"
+                 data-contenu-id="texte-article"
+                 data-type-contenu="texte">
+                <h2>L'importance de la visibilité web</h2>
+                <p>Dans l'écosystème numérique actuel, un contenu peut être techniquement
+                   chargé dans une page sans jamais être réellement vu par l'utilisateur.
+                   Cette problématique concerne aussi bien les publicités numériques que
+                   les contenus pédagogiques.</p>
+                <p>Mesurer la visibilité réelle permet d'évaluer l'engagement des
+                   utilisateurs et d'optimiser le placement des contenus. Les métriques
+                   clés incluent le taux de visibilité (pourcentage du contenu visible
+                   à l'écran) et la durée d'exposition (temps pendant lequel le contenu
+                   reste visible).</p>
+                <p>Notre système utilise l'API IntersectionObserver du navigateur pour
+                   détecter avec précision quand un élément entre et sort du viewport
+                   de l'utilisateur, sans impact sur les performances de la page.</p>
+            </div>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Bannière 3 -->
+        <section class="section-contenu">
+            <div class="etiquette">Bannière publicitaire #3</div>
+            <div class="banniere banniere-3"
+                 data-contenu-id="banniere-3"
+                 data-type-contenu="banniere">
+                Ateliers de robotique — Tous les samedis
+            </div>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Image produit 2 -->
+        <section class="section-contenu">
+            <div class="etiquette">Image de contenu #2</div>
+            <div class="image-contenu image-produit-2"
+                 data-contenu-id="image-produit-2"
+                 data-type-contenu="image">
+                Image de présentation — Formation JavaScript
+            </div>
+        </section>
+
+        <div class="separateur"></div>
+
+    </main>
+
+    <!-- Indicateur de tracking -->
+    <div class="indicateur-tracking">
+        <span class="point"></span> Tracking actif
+    </div>
+
+    <!-- Pied de page -->
+    <footer class="pied-de-page">
+        <p>Fondation Children Coding Club — Projet de mesure de visibilité web — 2026</p>
+    </footer>
+
+    <!-- Scripts de tracking -->
+    <script src="/statique/js/informations_contexte.js"></script>
+    <script src="/statique/js/collecteur_donnees.js"></script>
+    <script src="/statique/js/observateur_visibilite.js"></script>
+
+</body>
+</html>

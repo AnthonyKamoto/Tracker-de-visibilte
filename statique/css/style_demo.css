@@ -1,0 +1,213 @@
+/* Style de la page de démonstration */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* En-tête fixe */
+.entete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #1a237e, #283593);
+    color: white;
+    padding: 15px 30px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.entete h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.entete .lien-dashboard {
+    color: white;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.entete .lien-dashboard:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Contenu principal */
+.contenu-principal {
+    margin-top: 80px;
+    padding: 20px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Indicateur de tracking */
+.indicateur-tracking {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1a237e;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.indicateur-tracking .point {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #4caf50;
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: clignoter 1.5s infinite;
+}
+
+@keyframes clignoter {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Section de contenu surveillé */
+.section-contenu {
+    margin-bottom: 60px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s;
+}
+
+.section-contenu:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.section-contenu .etiquette {
+    background: #e8eaf6;
+    color: #1a237e;
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Bannières */
+.banniere {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.banniere-1 {
+    background: linear-gradient(135deg, #ff6b35, #f7931e);
+}
+
+.banniere-2 {
+    background: linear-gradient(135deg, #00b4d8, #0077b6);
+}
+
+.banniere-3 {
+    background: linear-gradient(135deg, #2d6a4f, #52b788);
+}
+
+/* Blocs de texte */
+.bloc-texte {
+    padding: 30px;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.bloc-texte h2 {
+    color: #1a237e;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.bloc-texte p {
+    margin-bottom: 12px;
+    color: #555;
+}
+
+/* Images de contenu */
+.image-contenu {
+    width: 100%;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.image-produit-1 {
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+}
+
+.image-produit-2 {
+    background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+}
+
+/* Espacement entre sections */
+.separateur {
+    height: 100px;
+}
+
+/* Pied de page */
+.pied-de-page {
+    background: #1a237e;
+    color: white;
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+}
+
+.pied-de-page p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contenu-principal {
+        padding: 10px;
+    }
+
+    .banniere {
+        height: 180px;
+        font-size: 1.1rem;
+    }
+
+    .image-contenu {
+        height: 250px;
+    }
+
+    .entete h1 {
+        font-size: 1rem;
+    }
+}
