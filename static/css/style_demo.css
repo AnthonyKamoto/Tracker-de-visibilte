@@ -27,6 +27,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .entete h1 {
@@ -192,22 +194,108 @@ body {
     opacity: 0.8;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive — Tablette */
+@media (max-width: 1024px) {
     .contenu-principal {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .banniere {
+        height: 220px;
+        font-size: 1.3rem;
+    }
+
+    .image-contenu {
+        height: 300px;
+    }
+
+    .separateur {
+        height: 60px;
+    }
+}
+
+/* Responsive — Mobile */
+@media (max-width: 768px) {
+    .entete {
+        padding: 12px 15px;
+    }
+
+    .entete h1 {
+        font-size: 0.95rem;
+    }
+
+    .entete .lien-dashboard {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    .contenu-principal {
+        margin-top: 90px;
         padding: 10px;
     }
 
     .banniere {
-        height: 180px;
-        font-size: 1.1rem;
+        height: 150px;
+        font-size: 1rem;
+        padding: 15px;
     }
 
     .image-contenu {
-        height: 250px;
+        height: 200px;
+        font-size: 1rem;
     }
 
-    .entete h1 {
-        font-size: 1rem;
+    .bloc-texte {
+        padding: 20px;
+        font-size: 0.9rem;
+    }
+
+    .bloc-texte h2 {
+        font-size: 1.15rem;
+    }
+
+    .separateur {
+        height: 40px;
+    }
+
+    .section-contenu {
+        margin-bottom: 30px;
+    }
+
+    .indicateur-tracking {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 0.7rem;
+    }
+
+    .pied-de-page {
+        padding: 20px 15px;
+    }
+
+    .pied-de-page p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive — Petit mobile */
+@media (max-width: 480px) {
+    .entete {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .banniere {
+        height: 120px;
+        font-size: 0.9rem;
+    }
+
+    .image-contenu {
+        height: 160px;
+    }
+
+    .bloc-texte {
+        padding: 15px;
     }
 }

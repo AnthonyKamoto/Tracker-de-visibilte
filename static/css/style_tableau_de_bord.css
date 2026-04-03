@@ -213,10 +213,30 @@ body {
     font-size: 0.8rem;
 }
 
-/* Responsive */
+/* Responsive — Tablette */
+@media (max-width: 1024px) {
+    .grille-graphiques {
+        grid-template-columns: 1fr;
+    }
+
+    .conteneur-dashboard {
+        padding: 0 15px;
+    }
+
+    .carte-graphique.pleine-largeur {
+        grid-column: auto;
+    }
+}
+
+/* Responsive — Mobile */
 @media (max-width: 768px) {
     .grille-graphiques {
         grid-template-columns: 1fr;
+    }
+
+    .grille-cartes {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
 
     .entete-dashboard {
@@ -225,5 +245,74 @@ body {
 
     .entete-dashboard h1 {
         font-size: 1.1rem;
+    }
+
+    .barre-filtres {
+        padding: 12px 15px;
+        gap: 10px;
+    }
+
+    .barre-filtres label {
+        font-size: 0.8rem;
+    }
+
+    .barre-filtres input[type="date"] {
+        font-size: 0.8rem;
+        padding: 5px 8px;
+    }
+
+    .carte-resume {
+        padding: 15px 10px;
+    }
+
+    .carte-resume .valeur {
+        font-size: 1.5rem;
+    }
+
+    .carte-resume .libelle {
+        font-size: 0.75rem;
+    }
+
+    .carte-graphique {
+        padding: 15px;
+    }
+
+    .carte-graphique h3 {
+        font-size: 0.9rem;
+    }
+
+    .section-tableau {
+        padding: 15px 10px;
+    }
+
+    .tableau-donnees th,
+    .tableau-donnees td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Responsive — Petit mobile */
+@media (max-width: 480px) {
+    .grille-cartes {
+        grid-template-columns: 1fr;
+    }
+
+    .entete-dashboard {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .barre-filtres {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .bouton-actualiser {
+        width: 100%;
+    }
+
+    .carte-resume .valeur {
+        font-size: 1.3rem;
     }
 }
