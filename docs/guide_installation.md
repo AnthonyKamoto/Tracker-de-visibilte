@@ -8,11 +8,26 @@ Ce guide explique comment installer, configurer et lancer le Tracker de visibili
 
 | Prerequis            | Version minimale | Remarque                                                  |
 |----------------------|------------------|-----------------------------------------------------------|
-| Python               | 3.10+            | Verifie avec `python --version`                           |
-| pip                  | 21+              | Gestionnaire de paquets Python                            |
-| Navigateur moderne   | ---              | Chrome, Firefox, Edge ou Safari supportant IntersectionObserver |
+| Python               | 3.10+            | `python --version` (Windows) ou `python3 --version` (macOS/Linux) |
+| pip                  | 21+              | Gestionnaire de paquets Python (inclus avec Python)       |
+| git                  | 2.x+             | Pour cloner le depot                                      |
+| Navigateur moderne   | ---              | Chrome 51+, Firefox 55+, Edge 15+, Safari 12.1+ (support IntersectionObserver) |
 
 > SQLite est inclus dans la bibliotheque standard de Python : aucune installation supplementaire n'est requise pour la base de donnees.
+
+---
+
+## Systemes d'exploitation supportes
+
+Le projet est compatible avec :
+
+| Systeme             | Teste | Remarques                                           |
+|---------------------|-------|-----------------------------------------------------|
+| **Windows 10/11**   | Oui   | PowerShell ou cmd                                   |
+| **macOS 12+**       | Oui   | Terminal (Bash / Zsh)                                |
+| **Linux (Ubuntu, Debian, Fedora...)** | Oui | Terminal Bash |
+
+Toutes les dependances sont multiplateformes. Le code Python utilise exclusivement `os.path` pour les chemins de fichiers, ce qui garantit la portabilite.
 
 ---
 
@@ -27,20 +42,27 @@ cd Projet_N4_CCC_Anthony_Kamoto
 
 ### 2. Creer et activer l'environnement virtuel
 
+**Creation (identique sur tous les OS) :**
+
 ```bash
 python -m venv venv
 ```
 
-Activation selon le terminal utilise :
+> Sur macOS/Linux, utiliser `python3` si `python` n'est pas reconnu.
 
-| Terminal     | Commande                        |
-|-------------|----------------------------------|
-| PowerShell  | `venv\Scripts\Activate.ps1`      |
-| cmd         | `venv\Scripts\activate.bat`      |
-| Bash / macOS| `source venv/bin/activate`       |
+**Activation selon le systeme et le terminal :**
+
+| Systeme         | Terminal     | Commande                          |
+|-----------------|-------------|-----------------------------------|
+| Windows         | PowerShell  | `venv\Scripts\Activate.ps1`       |
+| Windows         | cmd         | `venv\Scripts\activate.bat`       |
+| Windows         | Git Bash    | `source venv/Scripts/activate`    |
+| macOS / Linux   | Bash / Zsh  | `source venv/bin/activate`        |
 
 > Si PowerShell bloque l'activation, executer d'abord :
 > `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+Une fois active, le prefixe `(venv)` apparait dans le terminal.
 
 ### 3. Installer les dependances Python
 
@@ -133,9 +155,12 @@ Projet_N4_CCC_Anthony_Kamoto/
 
 ## Problemes courants
 
-| Probleme                        | Solution                                                      |
-|---------------------------------|---------------------------------------------------------------|
-| `ModuleNotFoundError: flask`    | Executer `pip install -r requirements.txt`                    |
-| Port 5000 deja utilise          | Modifier `PORT` dans `serveur/config.py`                      |
-| Base de donnees verrouillee     | Arreter les autres instances du serveur                       |
-| IntersectionObserver non supporte | Utiliser un navigateur moderne (Chrome 51+, Firefox 55+)    |
+| Probleme                        | OS       | Solution                                                      |
+|---------------------------------|----------|---------------------------------------------------------------|
+| `ModuleNotFoundError: flask`    | Tous     | Verifier que le venv est active, puis `pip install -r requirements.txt` |
+| `python` non reconnu            | macOS/Linux | Utiliser `python3` au lieu de `python`                     |
+| Activation PowerShell bloquee   | Windows  | `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` |
+| Port 5000 deja utilise          | Tous     | Modifier `PORT` dans `serveur/config.py`                      |
+| Port 5000 pris par AirPlay      | macOS    | Desactiver AirPlay Receiver dans Preferences systeme, ou changer le port |
+| Base de donnees verrouillee     | Tous     | Arreter les autres instances du serveur                       |
+| IntersectionObserver non supporte | Tous   | Utiliser un navigateur moderne (Chrome 51+, Firefox 55+)      |

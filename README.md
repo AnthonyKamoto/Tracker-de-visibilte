@@ -28,13 +28,32 @@ Ce systeme mesure la visibilite reelle des contenus affiches sur une page web : 
 
 ---
 
+## Compatibilite
+
+Le projet fonctionne sur **Windows**, **macOS** et **Linux**. Aucune dependance specifique a un systeme d'exploitation n'est requise. Python, SQLite et les navigateurs modernes sont disponibles sur les trois plateformes.
+
+---
+
 ## Installation rapide
+
+### Windows (PowerShell)
+
+```powershell
+git clone <url-du-depot>
+cd Projet_N4_CCC_Anthony_Kamoto
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python serveur/appli.py
+```
+
+### macOS / Linux (Bash)
 
 ```bash
 git clone <url-du-depot>
 cd Projet_N4_CCC_Anthony_Kamoto
-python -m venv venv
-venv\Scripts\Activate.ps1        # PowerShell (Windows)
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 python serveur/appli.py
 ```

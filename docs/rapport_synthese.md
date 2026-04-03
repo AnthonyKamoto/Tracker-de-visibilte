@@ -77,6 +77,9 @@ Le systeme repose sur une architecture en trois couches :
 | Graphiques       | Chart.js                 | Visualisation des statistiques dans le dashboard   |
 | Templates        | Jinja2 (via Flask)       | Rendu des pages HTML                               |
 | Tests            | pytest                   | Framework de tests unitaires                       |
+| Environnement    | venv                     | Environnement virtuel Python (isolement des dependances) |
+
+> Le projet est compatible **Windows**, **macOS** et **Linux**. Toutes les dependances sont multiplateformes et le code utilise `os.path` pour la gestion des chemins de fichiers.
 
 ---
 
@@ -97,6 +100,7 @@ Le prototype est **fonctionnel au niveau 2** (application complete avec interfac
 - **Filtre par plage de dates** : le tableau de bord permet de filtrer les donnees affichees selon une periode.
 - **27 tests unitaires** : couverture des 4 modules principaux (base de donnees, collecte, statistiques, analyseur), tous passent avec succes.
 - **API REST complete** : 7 endpoints couvrant la collecte et la restitution des donnees.
+- **Multiplateforme** : le projet fonctionne sur Windows, macOS et Linux sans modification.
 
 ---
 
