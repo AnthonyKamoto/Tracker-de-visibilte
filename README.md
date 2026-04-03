@@ -110,7 +110,6 @@ Projet_N4_CCC_Anthony_Kamoto/
     docs/
         base_de_donnees.md             # Schema de la BDD
         architecture.md                # Architecture du systeme
-        composants.md                  # Description des composants
         guide_installation.md          # Guide d'installation
         rapport_synthese.md            # Rapport de synthese
     requirements.txt                   # Dependances Python
