@@ -3,119 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Démo — Mesure de visibilité | CCC</title>
+    <title>Accessibilité Web — Fondation CCC</title>
     <link rel="stylesheet" href="/static/css/style_demo.css">
 </head>
 <body>
 
-    <!-- En-tête fixe -->
-    <header class="entete">
-        <h1>Mesure de visibilité — Fondation CCC</h1>
-        <a href="/tableau-de-bord" class="lien-dashboard">Tableau de bord</a>
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo">🚀 CCC Tracking</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Accueil</a></li>
+                    <li><a href="#articles">Articles</a></li>
+                    <li><a href="#ressources">Ressources</a></li>
+                    <li><a href="/tableau-de-bord">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <!-- Contenu principal -->
-    <main class="contenu-principal">
+    <!-- Main Content -->
+    <main class="container">
 
-        <div class="separateur"></div>
-
-        <!-- Bannière 1 -->
-        <section class="section-contenu">
-            <div class="etiquette">Bannière publicitaire #1</div>
-            <div class="banniere banniere-1"
-                 data-contenu-id="banniere-1"
-                 data-type-contenu="banniere">
-                Découvrez nos formations en développement web !
+        <!-- Hero Banner -->
+        <section class="section-contenu" id="hero" data-contenu-id="hero-banner" data-type-contenu="banniere">
+            <div class="etiquette">Bienvenue</div>
+            <div class="hero-banniere">
+                <h1>Pourquoi l'accessibilité web compte vraiment</h1>
+                <p>Découvrez comment les utilisateurs interagissent réellement avec le contenu web en conditions réelles</p>
             </div>
         </section>
 
         <div class="separateur"></div>
 
-        <!-- Texte d'introduction -->
-        <section class="section-contenu">
-            <div class="etiquette">Bloc de texte — Introduction</div>
-            <div class="bloc-texte"
-                 data-contenu-id="texte-intro"
-                 data-type-contenu="texte">
-                <h2>Bienvenue sur la plateforme CCC</h2>
-                <p>La Fondation Children Coding Club accompagne les jeunes dans leur
-                   apprentissage du numérique. Notre mission est de rendre la programmation
-                   accessible à tous, dès le plus jeune âge.</p>
-                <p>Cette page de démonstration permet de mesurer la visibilité réelle
-                   des contenus web. Chaque élément que vous voyez est surveillé par notre
-                   système de tracking. Scrollez pour découvrir les différents contenus.</p>
+        <!-- Section Intro -->
+        <section class="section-contenu" data-contenu-id="intro-principal" data-type-contenu="texte">
+            <div class="etiquette">Introduction</div>
+            <h2>Mission de la Fondation CCC</h2>
+            <p>La Fondation Children Coding Club accompagne les jeunes dans leur apprentissage du numérique. Notre mission est de rendre la programmation accessible à tous, dès le plus jeune âge. L'accessibilité web n'est pas seulement une conformité légale — c'est une nécessité morale pour créer un internet inclusif où chacun peut participer, apprendre et innover.</p>
+            <p>Cette page de démonstration mesure comment le contenu web est réellement vu par les visiteurs. Chaque élément que vous avez sur votre écran est surveillé en temps réel par notre système de tracking avancé. Scrollez à travers la page pour découvrir les différents types de contenus et voir comment ils sont suivis.</p>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Widget Statistiques -->
+        <section class="section-contenu widget" data-contenu-id="widget-stats" data-type-contenu="widget">
+            <div class="etiquette">Statistiques clés</div>
+            <div class="widget-stats">
+                <div class="stat-item">
+                    <span class="nombre">2.5M+</span>
+                    <span class="label">Pages visitées/mois</span>
+                </div>
+                <div class="stat-item">
+                    <span class="nombre">92%</span>
+                    <span class="label">Taux de visibilité moyen</span>
+                </div>
+                <div class="stat-item">
+                    <span class="nombre">3.2s</span>
+                    <span class="label">Durée moyenne exposition</span>
+                </div>
+                <div class="stat-item">
+                    <span class="nombre">15+</span>
+                    <span class="label">Pays représentés</span>
+                </div>
             </div>
         </section>
 
         <div class="separateur"></div>
 
-        <!-- Image produit 1 -->
-        <section class="section-contenu">
-            <div class="etiquette">Image de contenu #1</div>
-            <div class="image-contenu image-produit-1"
-                 data-contenu-id="image-produit-1"
-                 data-type-contenu="image">
-                Image de présentation — Formation Python
+        <!-- Article Vedette -->
+        <section class="section-contenu article-vedette" data-contenu-id="article-vedette" data-type-contenu="texte" id="articles">
+            <div class="etiquette">Article vedette</div>
+            <h2>Les principes fondamentaux de l'accessibilité web</h2>
+            <p>L'accessibilité web est aujourd'hui au cœur des préoccupations des développeurs modernes. Mais qu'est-ce que cela signifie réellement ? L'accessibilité web signifie que vos pages web, votre contenu et vos applications sont conçus pour être utilisés par tout le monde — quels que soient leurs capacités physiques, cognitives ou technologiques.</p>
+
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 300'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%237c3aed;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='500' height='300' fill='url(%23grad)'/%3E%3Ctext x='250' y='150' font-size='48' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E♿ Accessibilité</text%3E%3C/svg%3E" alt="Accessibilité web">
+
+            <p>Les quatre principes clés de l'accessibilité web sont la perceptibilité, l'opérabilité, la compréhensibilité et la robustesse (POUR). Ces principes garantissent que les personnes handicapées peuvent naviguer et interagir avec le web de manière significative.</p>
+            <p>En mesurant la visibilité réelle de vos contenus, vous pouvez identifier quels éléments importants sont véritablement vus par vos utilisateurs, et ajuster votre stratégie d'accessibilité en conséquence.</p>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Bannière Pub #1 -->
+        <section class="section-contenu banniere-pub" data-contenu-id="pub-tech-1" data-type-contenu="banniere">
+            <div class="etiquette">Publicité</div>
+            <h3>🎓 Formation Web Complète</h3>
+            <p>Apprenez HTML, CSS, JavaScript et bien plus avec notre méthode pédagogique innovante</p>
+            <a href="#" class="cta-button">Découvrir notre formation →</a>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- Galerie Images -->
+        <section class="section-contenu" data-contenu-id="galerie-images" data-type-contenu="galerie">
+            <div class="etiquette">Galerie</div>
+            <h2>Nos projets éducatifs</h2>
+            <div class="galerie-images">
+                <div class="image-card" data-contenu-id="image-coding-1" data-type-contenu="image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2310b981;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23059669;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g1)'/%3E%3Ctext x='200' y='150' font-size='56' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E&lt;/&gt;</text%3E%3C/svg%3E" alt="Développement inclusif">
+                    <caption>Développement Web Inclusif</caption>
+                </div>
+                <div class="image-card" data-contenu-id="image-coding-2" data-type-contenu="image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f97316;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23ea580c;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g2)'/%3E%3Ctext x='200' y='150' font-size='56' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E🤖</text%3E%3C/svg%3E" alt="Robotique pédagogique">
+                    <caption>Initiation à la Robotique</caption>
+                </div>
+                <div class="image-card" data-contenu-id="image-coding-3" data-type-contenu="image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%235b21b6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%237c3aed;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g3)'/%3E%3Ctext x='200' y='150' font-size='56' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E🎨</text%3E%3C/svg%3E" alt="Design interactif">
+                    <caption>Design UI/UX Accessible</caption>
+                </div>
             </div>
         </section>
 
         <div class="separateur"></div>
 
-        <!-- Bannière 2 -->
-        <section class="section-contenu">
-            <div class="etiquette">Bannière publicitaire #2</div>
-            <div class="banniere banniere-2"
-                 data-contenu-id="banniere-2"
-                 data-type-contenu="banniere">
-                Inscriptions ouvertes — Session de Juin 2026
-            </div>
+        <!-- Bannière Pub #2 -->
+        <section class="section-contenu banniere-pub" data-contenu-id="pub-tech-2" data-type-contenu="banniere">
+            <div class="etiquette">Publicité</div>
+            <h3>💻 Partenaires technologues</h3>
+            <p>Rejoignez notre réseau d'entreprises engagées pour l'éducation numérique inclusive</p>
+            <a href="#" class="cta-button">Devenir partenaire →</a>
         </section>
 
         <div class="separateur"></div>
 
-        <!-- Article texte long -->
-        <section class="section-contenu">
-            <div class="etiquette">Bloc de texte — Article</div>
-            <div class="bloc-texte"
-                 data-contenu-id="texte-article"
-                 data-type-contenu="texte">
-                <h2>L'importance de la visibilité web</h2>
-                <p>Dans l'écosystème numérique actuel, un contenu peut être techniquement
-                   chargé dans une page sans jamais être réellement vu par l'utilisateur.
-                   Cette problématique concerne aussi bien les publicités numériques que
-                   les contenus pédagogiques.</p>
-                <p>Mesurer la visibilité réelle permet d'évaluer l'engagement des
-                   utilisateurs et d'optimiser le placement des contenus. Les métriques
-                   clés incluent le taux de visibilité (pourcentage du contenu visible
-                   à l'écran) et la durée d'exposition (temps pendant lequel le contenu
-                   reste visible).</p>
-                <p>Notre système utilise l'API IntersectionObserver du navigateur pour
-                   détecter avec précision quand un élément entre et sort du viewport
-                   de l'utilisateur, sans impact sur les performances de la page.</p>
+        <!-- Vidéo Section -->
+        <section class="section-contenu" data-contenu-id="video-testimonial" data-type-contenu="video">
+            <div class="etiquette">Vidéo</div>
+            <h2>Témoignages de nos apprenants</h2>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Témoignages CCC" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
+            <p>Découvrez les histoires inspirantes de nos jeunes apprenants et comment ils ont transformé leur relation avec la technologie grâce à nos programmes.</p>
         </section>
 
         <div class="separateur"></div>
 
-        <!-- Bannière 3 -->
-        <section class="section-contenu">
-            <div class="etiquette">Bannière publicitaire #3</div>
-            <div class="banniere banniere-3"
-                 data-contenu-id="banniere-3"
-                 data-type-contenu="banniere">
-                Ateliers de robotique — Tous les samedis
-            </div>
+        <!-- Section Ressources -->
+        <section class="section-contenu" data-contenu-id="section-ressources" data-type-contenu="texte" id="ressources">
+            <div class="etiquette">Ressources</div>
+            <h2>Outils et ressources pratiques</h2>
+            <p>Pour mettre en place une stratégie d'accessibilité web efficace, plusieurs ressources et outils s'offrent à vous :</p>
+            <ul>
+                <li><strong>Validateurs WCAG :</strong> Des outils comme WAVE et Axe DevTools permettent de vérifier la conformité aux normes WCAG</li>
+                <li><strong>Lecteurs d'écran :</strong> NVDA, JAWS et VoiceOver pour tester l'expérience utilisateur des personnes malvoyantes</li>
+                <li><strong>Extensions navigateur :</strong> Lighthouse et des outils de contraste pour évaluer rapidement vos pages</li>
+                <li><strong>Métriques de visibilité :</strong> Notre système de tracking pour mesurer l'engagement réel du contenu</li>
+            </ul>
+            <p>Ces ressources vous aideront à créer un web plus accessible et inclusif pour tous les utilisateurs, quel que soit leur contexte.</p>
         </section>
 
         <div class="separateur"></div>
 
-        <!-- Image produit 2 -->
-        <section class="section-contenu">
-            <div class="etiquette">Image de contenu #2</div>
-            <div class="image-contenu image-produit-2"
-                 data-contenu-id="image-produit-2"
-                 data-type-contenu="image">
-                Image de présentation — Formation JavaScript
+        <!-- Bannière Pub #3 -->
+        <section class="section-contenu banniere-pub" data-contenu-id="pub-tech-3" data-type-contenu="banniere">
+            <div class="etiquette">Publicité</div>
+            <h3>📊 Analytics Avancée</h3>
+            <p>Mesurez précisément la visibilité et l'engagement de chaque élément de votre site</p>
+            <a href="#" class="cta-button">Essayer gratuitement →</a>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- CTA Section -->
+        <section class="section-contenu cta-section" data-contenu-id="cta-principal" data-type-contenu="cta">
+            <div class="etiquette">Appel à l'action</div>
+            <h2>Prêt à transformer votre expérience web ?</h2>
+            <p>Rejoignez des milliers d'organisations qui utilisent nos outils pour créer des expériences web plus accessibles et inclusives</p>
+            <a href="#" class="cta-principal">Commencer maintenant</a>
+        </section>
+
+        <div class="separateur"></div>
+
+        <!-- FAQ Section -->
+        <section class="section-contenu" data-contenu-id="faq-section" data-type-contenu="faq">
+            <div class="etiquette">Questions fréquentes</div>
+            <h2>FAQ — Accessibility & Tracking</h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-title" data-contenu-id="faq-q1" data-type-contenu="faq-item">
+                        Q: Comment fonctionne le tracking de visibilité ?
+                    </div>
+                    <div class="faq-answer">
+                        Nous utilisons l'API IntersectionObserver du navigateur pour détecter quand les éléments entrent et sortent du viewport. Cette API offre une excellente performance et une grande précision sans impacter les performances de la page.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-title" data-contenu-id="faq-q2" data-type-contenu="faq-item">
+                        Q: Quelles données sont collectées ?
+                    </div>
+                    <div class="faq-answer">
+                        Nous collectons le pourcentage de visibilité, la durée d'exposition, le type d'appareil, le navigateur, et les dimensions de l'écran. Aucune donnée personnelle n'est stockée — tout est totalement anonyme et conforme au RGPD.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-title" data-contenu-id="faq-q3" data-type-contenu="faq-item">
+                        Q: Quel est l'impact sur les performances ?
+                    </div>
+                    <div class="faq-answer">
+                        L'impact est minimal. IntersectionObserver est optimisé par les navigateurs modernes et ne crée pas de reflow. Les données sont envoyées par lots toutes les 3 secondes pour minimiser les requêtes réseau.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-title" data-contenu-id="faq-q4" data-type-contenu="faq-item">
+                        Q: Comment les données sont-elles sécurisées ?
+                    </div>
+                    <div class="faq-answer">
+                        Les données transitent en HTTPS et sont stockées dans une base de données SQLite sécurisée. Aucun tiers ne peut accéder aux données collectées sans permission explicite.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-title" data-contenu-id="faq-q5" data-type-contenu="faq-item">
+                        Q: Puis-je tester sur l'ensemble du web ?
+                    </div>
+                    <div class="faq-answer">
+                        Oui ! Notre système est agnostique au contenu. Tant que vous ajoutez les attributs data-contenu-id et data-type-contenu à vos éléments HTML, ils seront automatiquement suivis et mesurés.
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -123,20 +228,31 @@
 
     </main>
 
-    <!-- Indicateur de tracking -->
-    <div class="indicateur-tracking">
-        <span class="point"></span> Tracking actif
+    <!-- Tracking Indicator -->
+    <div class="indicateur-suivi">
+        ✓ Tracking actif
     </div>
 
-    <!-- Pied de page -->
-    <footer class="pied-de-page">
-        <p>Fondation Children Coding Club — Projet de mesure de visibilité web — 2026</p>
+    <!-- Footer -->
+    <footer>
+        <p><strong>Fondation Children Coding Club</strong> — Système de mesure de visibilité web — 2026</p>
+        <p><a href="/tableau-de-bord">Voir le tableau de bord →</a></p>
     </footer>
 
-    <!-- Scripts de tracking -->
+    <!-- Tracking Scripts -->
     <script src="/static/js/informations_contexte.js"></script>
     <script src="/static/js/collecteur_donnees.js"></script>
     <script src="/static/js/observateur_visibilite.js"></script>
+
+    <!-- FAQ Toggle Script -->
+    <script>
+        document.querySelectorAll('.faq-title').forEach(title => {
+            title.addEventListener('click', function() {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+    </script>
 
 </body>
 </html>

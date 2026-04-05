@@ -51,6 +51,17 @@ def initialiser_bdd():
         )
     """)
 
+    # Types de contenu acceptés :
+    # - banniere : bannière publicitaire ou promotionnelle
+    # - texte : bloc de texte, paragraphes, articles
+    # - image : images, cartes, illustrations
+    # - video : vidéo embarquée, iframes YouTube/Vimeo
+    # - widget : petit bloc informatif (statistiques, miniatures)
+    # - galerie : groupement d'images
+    # - cta : call-to-action, boutons, sections engageantes
+    # - faq : section de FAQ
+    # - faq-item : élément individuel de FAQ
+
     curseur.execute("""
         CREATE INDEX IF NOT EXISTS idx_evenements_contenu
         ON evenements_visibilite(id_contenu)

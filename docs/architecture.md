@@ -197,7 +197,27 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 
 ---
 
-## 5. Structure des dossiers
+## 5.1 Types de contenu supportes
+
+Le systeme de tracking supporte les types de contenu suivants (extensibles) :
+
+| Type | Description |
+|------|-------------|
+| **banniere** | Bannière publicitaire, promotionnelle ou informationnelle |
+| **texte** | Bloc de texte, paragraphes, articles, sections informatives |
+| **image** | Images, cartes, illustrations, photo produit |
+| **video** | Vidéo embarquée, iframes YouTube/Vimeo, conteneur vidéo |
+| **widget** | Petit bloc informatif : statistiques, miniatures, compteurs |
+| **galerie** | Groupement d'images (carrousel, grille) |
+| **cta** | Call-To-Action, boutons, sections engageantes |
+| **faq** | Section FAQ, bloc de questions-réponses |
+| **faq-item** | Élément individuel de FAQ (question + réponse collapsible) |
+
+Les éléments HTML doivent porter les attributs `data-contenu-id` (identifiant unique) et `data-type-contenu` (type) pour être automatiquement tracés par l'`IntersectionObserver`.
+
+---
+
+## 6. Structure des dossiers
 
 ```
 Projet_N4_CCC_Anthony_Kamoto/
@@ -224,7 +244,8 @@ Projet_N4_CCC_Anthony_Kamoto/
 |       |-- analyseur.py            # Calculs statistiques (agregations SQL)
 |
 |-- templates/                       # Templates HTML Jinja2
-|   |-- page_demo.html              # Page de demonstration avec contenus observes
+|   |-- page_demo.html              # Landing page professionnelle — Blog/Forum sur l'accessibilité web
+|   |                               # (contient ~15 éléments trackés : bannières, images, vidéo, FAQ, CTA, widgets)
 |   |-- tableau_de_bord.html        # Tableau de bord des statistiques
 |
 |-- static/                          # Fichiers statiques (CSS, JS)
