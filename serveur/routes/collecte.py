@@ -3,12 +3,38 @@ Routes API pour la collecte des données de visibilité.
 """
 
 import json
+import logging
 
 from flask import Blueprint, request, jsonify
 from serveur.modeles.session import creer_session, obtenir_session
 from serveur.modeles.evenement import enregistrer_lot_evenements
 
 collecte_bp = Blueprint('collecte', __name__)
+journal = logging.getLogger(__name__)
+
+# Limites de validation
+TAILLE_MAX_CHAINE = 256
+TAILLE_MAX_LOT = 500
+
+
+def _valider_chaine(valeur, nom_champ, obligatoire=False):
+    """Vérifie qu'une valeur est une chaîne valide."""
+    if valeur is None:
+        if obligatoire:
+            return f"Champ requis manquant : {nom_champ}"
+        return None
+    if not isinstance(valeur, str) or len(valeur) > TAILLE_MAX_CHAINE:
+        return f"Champ invalide : {nom_champ}"
+    return None
+
+
+def _valider_entier(valeur, nom_champ):
+    """Vérifie qu'une valeur est un entier positif (pas de flottant)."""
+    if valeur is None:
+        return None
+    if isinstance(valeur, bool) or not isinstance(valeur, int) or valeur < 0:
+        return f"Champ invalide : {nom_champ}"
+    return None
 
 
 @collecte_bp.route('/api/sessions', methods=['POST'])
@@ -19,10 +45,22 @@ def creer_nouvelle_session():
     if not donnees:
         return jsonify({'succes': False, 'erreur': 'Données JSON requises'}), 400
 
-    champs_requis = ['id_session', 'type_appareil']
-    for champ in champs_requis:
-        if champ not in donnees:
-            return jsonify({'succes': False, 'erreur': f'Champ requis manquant : {champ}'}), 400
+    # Validation des champs
+    erreur = _valider_chaine(donnees.get('id_session'), 'id_session', obligatoire=True)
+    if erreur:
+        return jsonify({'succes': False, 'erreur': erreur}), 400
+
+    erreur = _valider_chaine(donnees.get('type_appareil'), 'type_appareil', obligatoire=True)
+    if erreur:
+        return jsonify({'succes': False, 'erreur': erreur}), 400
+
+    erreur = _valider_entier(donnees.get('largeur_ecran'), 'largeur_ecran')
+    if erreur:
+        return jsonify({'succes': False, 'erreur': erreur}), 400
+
+    erreur = _valider_entier(donnees.get('hauteur_ecran'), 'hauteur_ecran')
+    if erreur:
+        return jsonify({'succes': False, 'erreur': erreur}), 400
 
     # Vérifier si la session existe déjà
     if obtenir_session(donnees['id_session']):
@@ -31,8 +69,9 @@ def creer_nouvelle_session():
     try:
         id_session = creer_session(donnees)
         return jsonify({'succes': True, 'id_session': id_session}), 201
-    except Exception as e:
-        return jsonify({'succes': False, 'erreur': str(e)}), 500
+    except Exception as exc:
+        journal.error("Erreur creation session : %s", exc)
+        return jsonify({'succes': False, 'erreur': 'Erreur lors de la création de la session'}), 500
 
 
 @collecte_bp.route('/api/evenements', methods=['POST'])
@@ -54,11 +93,35 @@ def enregistrer_evenements():
     if not evenements:
         return jsonify({'succes': False, 'erreur': 'Aucun événement fourni'}), 400
 
+    if not isinstance(evenements, list) or len(evenements) > TAILLE_MAX_LOT:
+        return jsonify({'succes': False, 'erreur': f'Le lot ne peut pas dépasser {TAILLE_MAX_LOT} événements'}), 400
+
+    # Validation de chaque événement
+    for evt in evenements:
+        if not isinstance(evt, dict):
+            return jsonify({'succes': False, 'erreur': 'Format d\'événement invalide'}), 400
+        if 'id_contenu' not in evt or 'pourcentage_visibilite' not in evt:
+            return jsonify({'succes': False, 'erreur': 'Champs requis : id_contenu, pourcentage_visibilite'}), 400
+        erreur = _valider_chaine(evt.get('id_contenu'), 'id_contenu', obligatoire=True)
+        if erreur:
+            return jsonify({'succes': False, 'erreur': erreur}), 400
+        erreur = _valider_chaine(evt.get('type_contenu'), 'type_contenu')
+        if erreur:
+            return jsonify({'succes': False, 'erreur': erreur}), 400
+        pv = evt['pourcentage_visibilite']
+        if not isinstance(pv, (int, float)) or pv < 0 or pv > 1:
+            return jsonify({'succes': False, 'erreur': 'pourcentage_visibilite doit être entre 0 et 1'}), 400
+
+    # Vérifier que la session existe avant l'insertion (clé étrangère)
+    if not obtenir_session(donnees['id_session']):
+        return jsonify({'succes': False, 'erreur': 'Session introuvable'}), 404
+
     try:
-        ids = enregistrer_lot_evenements(donnees['id_session'], evenements)
+        nombre = enregistrer_lot_evenements(donnees['id_session'], evenements)
         return jsonify({
             'succes': True,
-            'nombre_enregistres': len(ids)
+            'nombre_enregistres': nombre
         }), 201
-    except Exception as e:
-        return jsonify({'succes': False, 'erreur': str(e)}), 500
+    except Exception as exc:
+        journal.error("Erreur enregistrement evenements : %s", exc)
+        return jsonify({'succes': False, 'erreur': 'Erreur lors de l\'enregistrement des événements'}), 500

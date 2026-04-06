@@ -8,6 +8,8 @@ import os
 
 import pytest
 
+from serveur.appli import creer_application
+
 
 @pytest.fixture(autouse=True)
 def bdd_temporaire(monkeypatch, tmp_path):
@@ -16,3 +18,12 @@ def bdd_temporaire(monkeypatch, tmp_path):
     monkeypatch.setattr("serveur.config.CHEMIN_BDD", chemin_temp)
     monkeypatch.setattr("serveur.base_de_donnees.CHEMIN_BDD", chemin_temp)
     yield chemin_temp
+
+
+@pytest.fixture
+def client(bdd_temporaire):
+    """Fournit un client de test Flask avec une BDD temporaire initialisee."""
+    appli = creer_application()
+    appli.config['TESTING'] = True
+    with appli.test_client() as client:
+        yield client

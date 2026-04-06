@@ -34,6 +34,21 @@
         "#457b9d",
     ]
 
+    // --- Donnees du tableau (pour le tri) ---
+    var donneesTableau = []
+    var triColonne = null
+    var triAscendant = true
+
+    // --- Echappement HTML (protection XSS) ---
+    function echapper(valeur) {
+        return String(valeur == null ? "-" : valeur)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;")
+    }
+
     // --- Indicateur de connexion ---
     function mettreAJourBadgeConnexion(connecte) {
         var badge = document.getElementById("badge-connexion")
@@ -276,8 +291,13 @@
     }
 
     function mettreAJourTableau(donnees) {
+        donneesTableau = donnees || []
+        afficherTableau()
+    }
+
+    function afficherTableau() {
         var corps = document.getElementById("corps-tableau")
-        if (!donnees || donnees.length === 0) {
+        if (!donneesTableau || donneesTableau.length === 0) {
             corps.innerHTML =
                 '<tr><td colspan="5">' +
                 '<div class="etat-vide-conteneur">' +
@@ -289,13 +309,13 @@
                 '</td></tr>'
             return
         }
-        corps.innerHTML = donnees
+        corps.innerHTML = donneesTableau
             .map(function (d) {
                 return (
                     "<tr><td>" +
-                    d.id_contenu +
+                    echapper(d.id_contenu) +
                     "</td><td>" +
-                    (d.type_contenu || "-") +
+                    echapper(d.type_contenu) +
                     "</td><td>" +
                     d.nombre_vues +
                     "</td><td>" +
@@ -308,27 +328,60 @@
             .join("")
     }
 
+    function trierTableau(indexColonne) {
+        var cles = ["id_contenu", "type_contenu", "nombre_vues", "duree_moyenne_ms", "visibilite_moyenne"]
+        var cle = cles[indexColonne]
+        if (triColonne === cle) {
+            triAscendant = !triAscendant
+        } else {
+            triColonne = cle
+            triAscendant = true
+        }
+        donneesTableau.sort(function (a, b) {
+            var va = a[cle] || ""
+            var vb = b[cle] || ""
+            if (typeof va === "string") {
+                var cmp = va.localeCompare(vb)
+                return triAscendant ? cmp : -cmp
+            }
+            return triAscendant ? va - vb : vb - va
+        })
+        // Mettre a jour les indicateurs de tri dans les en-tetes
+        var enTetes = document.querySelectorAll(".tableau-donnees th")
+        enTetes.forEach(function (th, i) {
+            th.classList.remove("tri-asc", "tri-desc")
+            if (i === indexColonne) {
+                th.classList.add(triAscendant ? "tri-asc" : "tri-desc")
+            }
+        })
+        afficherTableau()
+    }
+
     async function chargerDonnees() {
         var params = obtenirParametresDate()
         try {
             var resultats = await Promise.all([
                 fetch(URL_API + "/api/statistiques/contenus" + params).then(
                     function (r) {
+                        if (!r.ok) throw new Error("Erreur HTTP " + r.status)
                         return r.json()
                     },
                 ),
                 fetch(URL_API + "/api/statistiques/sessions" + params).then(
                     function (r) {
+                        if (!r.ok) throw new Error("Erreur HTTP " + r.status)
                         return r.json()
                     },
                 ),
                 fetch(URL_API + "/api/statistiques/appareils" + params).then(
                     function (r) {
+                        if (!r.ok) throw new Error("Erreur HTTP " + r.status)
                         return r.json()
                     },
                 ),
                 fetch(URL_API + "/api/statistiques/navigateurs" + params).then(
                     function (r) {
+                        if (!r.ok) throw new Error("Erreur HTTP " + r.status)
                         return r.json()
                     },
                 ),
@@ -379,5 +432,13 @@
     document
         .getElementById("btn-actualiser")
         .addEventListener("click", chargerDonnees)
+
+    // --- Tri des colonnes du tableau ---
+    document.querySelectorAll(".tableau-donnees th").forEach(function (th, i) {
+        th.addEventListener("click", function () {
+            trierTableau(i)
+        })
+    })
+
     chargerDonnees()
 })()

@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS evenements_visibilite (
 
 ## Index
 
-Deux index sont crees pour accelerer les requetes les plus frequentes (recherche par contenu et par session).
+Quatre index sont crees pour accelerer les requetes les plus frequentes (recherche par contenu, par session et par date).
 
 ```sql
 CREATE INDEX IF NOT EXISTS idx_evenements_contenu
@@ -81,6 +81,12 @@ ON evenements_visibilite(id_contenu);
 
 CREATE INDEX IF NOT EXISTS idx_evenements_session
 ON evenements_visibilite(id_session);
+
+CREATE INDEX IF NOT EXISTS idx_evenements_date
+ON evenements_visibilite(date_enregistrement);
+
+CREATE INDEX IF NOT EXISTS idx_sessions_date
+ON sessions(date_debut);
 ```
 
 ---

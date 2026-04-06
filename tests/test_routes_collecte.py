@@ -12,15 +12,6 @@ import pytest
 from serveur.appli import creer_application
 
 
-@pytest.fixture
-def client(bdd_temporaire):
-    """Client de test Flask."""
-    appli = creer_application()
-    appli.config['TESTING'] = True
-    with appli.test_client() as client:
-        yield client
-
-
 def test_creer_session(client):
     """POST /api/sessions doit creer une session."""
     reponse = client.post('/api/sessions', json={

@@ -122,7 +122,7 @@ python dashboard/appli.py
             📁 js/
                 ⚡ tableau_de_bord.js          # Graphiques Chart.js
     📁 templates/
-        🌐 page_demo.html                     # Site d'actualites (21 elements surveilles)
+        🌐 actualites.html                     # Site d'actualites (21 elements surveilles)
     📁 static/
         📁 css/
             🎨 style_demo.css                 # Styles du site d'actualites

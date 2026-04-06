@@ -11,9 +11,9 @@ REPERTOIRE_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHEMIN_BDD = os.path.join(REPERTOIRE_BASE, 'donnees', 'visibilite.db')
 
 # Configuration du serveur
-HOTE = '0.0.0.0'
+HOTE = '127.0.0.1'
 PORT = 5000
-MODE_DEBUG = True
+MODE_DEBUG = False
 
 # Délai d'attente SQLite en secondes (pour gérer les accès concurrents)
 DELAI_ATTENTE_BDD = 10

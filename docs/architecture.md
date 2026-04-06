@@ -11,8 +11,8 @@ Les trois couches sont les suivantes :
 | Couche | Role | Technologies |
 |--------|------|--------------|
 | **Front-end (navigateur)** | Detecte la visibilite des contenus via `IntersectionObserver`, collecte les informations contextuelles (appareil, navigateur, ecran) et envoie les evenements par lots au serveur. | HTML5, CSS3, JavaScript vanilla, IntersectionObserver API, Chart.js |
-| **Back-end (serveur Flask)** | Expose une API REST pour recevoir les sessions et les evenements, sert le site d'actualites et fournit les routes de statistiques. Active CORS pour permettre la communication avec le dashboard. | Python 3.12, Flask 3.x, Flask-CORS |
-| **Dashboard (application separee)** | Application Flask independante qui consomme les API de statistiques du serveur principal et affiche les resultats dans des graphiques interactifs. | Python 3.12, Flask 3.x, Chart.js |
+| **Back-end (serveur Flask)** | Expose une API REST pour recevoir les sessions et les evenements, sert le site d'actualites et fournit les routes de statistiques. Active CORS pour permettre la communication avec le dashboard. | Python 3.10+, Flask 3.x, Flask-CORS |
+| **Dashboard (application separee)** | Application Flask independante qui consomme les API de statistiques du serveur principal et affiche les resultats dans des graphiques interactifs. | Python 3.10+, Flask 3.x, Chart.js |
 | **Base de donnees (SQLite)** | Stocke les sessions utilisateur et les evenements de visibilite dans un fichier local (`donnees/visibilite.db`). | SQLite 3 |
 
 ---
@@ -199,7 +199,9 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 
 ---
 
-## 5.1 Types de contenu supportes
+## 5. Types de contenu
+
+### 5.1 Types de contenu supportes
 
 Le systeme de tracking supporte les types de contenu suivants (extensibles) :
 
@@ -258,7 +260,7 @@ Les éléments HTML doivent porter les attributs `data-contenu-id` (identifiant 
 |           |-- ⚡ tableau_de_bord.js          # Graphiques Chart.js + auto-refresh
 |
 |-- 📁 templates/                       # Templates HTML du site d'actualites
-|   |-- 🌐 page_demo.html              # Site d'actualites (21 elements surveilles)
+|   |-- 🌐 actualites.html              # Site d'actualites (21 elements surveilles)
 |
 |-- 📁 static/                          # Fichiers statiques du site d'actualites
 |   |-- 📁 css/

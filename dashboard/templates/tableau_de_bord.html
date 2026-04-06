@@ -29,7 +29,7 @@
                         (10s)</span
                     >
                 </label>
-                <a href="http://localhost:5000/actualites" class="lien-demo"
+                <a href="{{ url_serveur }}/actualites" class="lien-demo"
                     >Retour au site</a
                 >
             </div>
@@ -37,16 +37,23 @@
 
         <!-- Barre de filtres -->
         <div class="barre-filtres">
-            <label for="date-debut">Du :</label>
-            <input type="date" id="date-debut" />
-            <label for="date-fin">Au :</label>
-            <input type="date" id="date-fin" />
+            <div class="filtres-dates">
+                <div class="filtre-groupe">
+                    <label for="date-debut">Du :</label>
+                    <input type="date" id="date-debut" />
+                </div>
+                <div class="filtre-groupe">
+                    <label for="date-fin">Au :</label>
+                    <input type="date" id="date-fin" />
+                </div>
+            </div>
             <button class="bouton-actualiser" id="btn-actualiser">
                 <i class="fa-solid fa-rotate"></i> Actualiser
             </button>
         </div>
 
         <!-- Conteneur principal -->
+        <main>
         <div class="conteneur-dashboard">
             <!-- Cartes de résumé -->
             <div class="grille-cartes">
@@ -136,6 +143,7 @@
                 </table>
             </div>
         </div>
+        </main>
 
         <!-- Pied de page -->
         <div class="pied-dashboard">
@@ -145,7 +153,7 @@
 
         <script>
             // URL du serveur principal (injectee par Flask)
-            var URL_API = "{{ url_serveur }}"
+            var URL_API = {{ url_serveur|tojson }}
         </script>
         <script src="/static/js/tableau_de_bord.js"></script>
     </body>

@@ -16,6 +16,7 @@ def obtenir_connexion():
     connexion = sqlite3.connect(CHEMIN_BDD, timeout=DELAI_ATTENTE_BDD)
     connexion.row_factory = sqlite3.Row
     connexion.execute("PRAGMA foreign_keys = ON")
+    connexion.execute("PRAGMA journal_mode = WAL")
     return connexion
 
 
@@ -69,6 +70,14 @@ def initialiser_bdd():
     curseur.execute("""
         CREATE INDEX IF NOT EXISTS idx_evenements_session
         ON evenements_visibilite(id_session)
+    """)
+    curseur.execute("""
+        CREATE INDEX IF NOT EXISTS idx_evenements_date
+        ON evenements_visibilite(date_enregistrement)
+    """)
+    curseur.execute("""
+        CREATE INDEX IF NOT EXISTS idx_sessions_date
+        ON sessions(date_debut)
     """)
 
     connexion.commit()

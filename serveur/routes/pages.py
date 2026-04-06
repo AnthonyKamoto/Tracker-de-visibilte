@@ -16,4 +16,4 @@ def accueil():
 @pages_bp.route('/actualites')
 def actualites():
     """Affiche le site d'actualités avec les contenus surveillés."""
-    return render_template('page_demo.html')
+    return render_template('actualites.html')

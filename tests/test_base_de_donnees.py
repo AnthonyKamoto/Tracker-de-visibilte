@@ -9,7 +9,6 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pytest
 from serveur.base_de_donnees import initialiser_bdd, obtenir_connexion
-from serveur.config import CHEMIN_BDD
 
 
 @pytest.fixture(autouse=True)
@@ -19,9 +18,9 @@ def bdd_propre(bdd_temporaire):
     yield
 
 
-def test_creation_fichier_bdd():
+def test_creation_fichier_bdd(bdd_temporaire):
     """Le fichier de base de donnees doit exister apres initialisation."""
-    assert os.path.exists(CHEMIN_BDD)
+    assert os.path.exists(bdd_temporaire)
 
 
 def test_table_sessions_existe():
