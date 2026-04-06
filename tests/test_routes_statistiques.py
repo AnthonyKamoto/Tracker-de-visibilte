@@ -112,3 +112,27 @@ def test_stats_bdd_vide(bdd_temporaire):
         assert reponse.status_code == 200
         donnees = reponse.get_json()
         assert donnees['donnees'] == []
+
+
+def test_stats_filtrage_date(client):
+    """GET /api/statistiques/contenus avec filtre date doit fonctionner."""
+    reponse = client.get('/api/statistiques/contenus?date_debut=2020-01-01&date_fin=2099-12-31')
+    assert reponse.status_code == 200
+    donnees = reponse.get_json()
+    assert donnees['succes'] is True
+    assert len(donnees['donnees']) == 2
+
+    # Avec des dates qui excluent tout
+    reponse = client.get('/api/statistiques/contenus?date_debut=2099-01-01')
+    assert reponse.status_code == 200
+    donnees = reponse.get_json()
+    assert donnees['donnees'] == []
+
+
+def test_stats_sessions_filtrage_date(client):
+    """GET /api/statistiques/sessions avec filtre date doit fonctionner."""
+    reponse = client.get('/api/statistiques/sessions?date_debut=2099-01-01')
+    assert reponse.status_code == 200
+    donnees = reponse.get_json()
+    assert donnees['succes'] is True
+    assert donnees['donnees']['nombre_sessions'] == 0

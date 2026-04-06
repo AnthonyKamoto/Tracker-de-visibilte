@@ -178,3 +178,47 @@ def test_redirection_racine(client):
     reponse = client.get('/')
     assert reponse.status_code in (301, 302)
     assert '/actualites' in reponse.headers.get('Location', '')
+
+
+def test_obtenir_session_existante(client):
+    """Une session creee doit etre retrouvable."""
+    from serveur.modeles.session import obtenir_session
+    client.post('/api/sessions', json={
+        'id_session': 'test-obtenir',
+        'type_appareil': 'tablette',
+        'largeur_ecran': 768,
+        'hauteur_ecran': 1024,
+        'navigateur': 'Firefox 120',
+        'page_consultee': '/actualites'
+    })
+    session = obtenir_session('test-obtenir')
+    assert session is not None
+    assert session['type_appareil'] == 'tablette'
+    assert session['navigateur'] == 'Firefox 120'
+
+
+def test_obtenir_session_inexistante(client):
+    """Chercher une session inexistante doit retourner None."""
+    from serveur.modeles.session import obtenir_session
+    session = obtenir_session('session-fantome')
+    assert session is None
+
+
+def test_envoi_sendbeacon(client):
+    """Les donnees envoyees via sendBeacon (Content-Type text/plain) doivent fonctionner."""
+    import json
+    client.post('/api/sessions', json={
+        'id_session': 'test-beacon',
+        'type_appareil': 'mobile'
+    })
+    donnees = json.dumps({
+        'id_session': 'test-beacon',
+        'evenements': [
+            {'id_contenu': 'banniere-1', 'pourcentage_visibilite': 0.6}
+        ]
+    })
+    reponse = client.post('/api/evenements',
+                          data=donnees,
+                          content_type='text/plain')
+    assert reponse.status_code == 201
+    assert reponse.get_json()['succes'] is True

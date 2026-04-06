@@ -58,18 +58,3 @@ def enregistrer_lot_evenements(id_session, evenements):
         return len(donnees_lot)
     finally:
         connexion.close()
-
-
-def obtenir_evenements_par_contenu(id_contenu):
-    """Récupère tous les événements pour un contenu donné."""
-    connexion = obtenir_connexion()
-    try:
-        curseur = connexion.cursor()
-        curseur.execute("""
-            SELECT * FROM evenements_visibilite
-            WHERE id_contenu = ?
-            ORDER BY date_enregistrement DESC
-        """, (id_contenu,))
-        return [dict(ligne) for ligne in curseur.fetchall()]
-    finally:
-        connexion.close()
