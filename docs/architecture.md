@@ -11,7 +11,8 @@ Les trois couches sont les suivantes :
 | Couche | Role | Technologies |
 |--------|------|--------------|
 | **Front-end (navigateur)** | Detecte la visibilite des contenus via `IntersectionObserver`, collecte les informations contextuelles (appareil, navigateur, ecran) et envoie les evenements par lots au serveur. | HTML5, CSS3, JavaScript vanilla, IntersectionObserver API, Chart.js |
-| **Back-end (serveur Flask)** | Expose une API REST pour recevoir les sessions et les evenements, sert les pages HTML (demo et tableau de bord) et fournit les routes de statistiques. | Python 3.12, Flask 3.x |
+| **Back-end (serveur Flask)** | Expose une API REST pour recevoir les sessions et les evenements, sert le site d'actualites et fournit les routes de statistiques. Active CORS pour permettre la communication avec le dashboard. | Python 3.12, Flask 3.x, Flask-CORS |
+| **Dashboard (application separee)** | Application Flask independante qui consomme les API de statistiques du serveur principal et affiche les resultats dans des graphiques interactifs. | Python 3.12, Flask 3.x, Chart.js |
 | **Base de donnees (SQLite)** | Stocke les sessions utilisateur et les evenements de visibilite dans un fichier local (`donnees/visibilite.db`). | SQLite 3 |
 
 ---
@@ -43,49 +44,48 @@ Les trois couches sont les suivantes :
                                 |
                                 v
 +-------------------------------|-------------------------------+
-|                   SERVEUR FLASK (back-end)                    |
+|              SERVEUR D'ACTUALITES (port 5000)                 |
 |                                                               |
 |  +--------------------+   +-----------------------------+     |
 |  | Routes pages       |   | Routes collecte (API)       |     |
 |  | GET /              |   | POST /api/sessions          |     |
-|  | GET /demo          |   | POST /api/evenements        |     |
-|  | GET /tableau-de-   |   +-----------------------------+     |
-|  |      bord          |                                       |
+|  | GET /actualites    |   | POST /api/evenements        |     |
 |  +--------------------+   +-----------------------------+     |
-|                           | Routes statistiques (API)   |     |
-|  +--------------------+   | GET /api/statistiques/      |     |
-|  | Modeles            |   |     contenus                |     |
-|  | - session.py       |   |     contenus/<id>           |     |
-|  | - evenement.py     |   |     sessions                |     |
-|  +--------------------+   |     appareils               |     |
-|                           |     navigateurs             |     |
-|  +--------------------+   +-----------------------------+     |
-|  | Utilitaires        |                                       |
-|  | - analyseur.py     |                                       |
-|  +--------------------+                                       |
-+-------------------------------|-------------------------------+
-                                |
-                      Lecture / Ecriture
-                                |
-                                v
-+-------------------------------|-------------------------------+
-|                     BASE DE DONNEES SQLite                    |
-|                  donnees/visibilite.db                        |
 |                                                               |
-|  +-------------------------+  +----------------------------+  |
-|  | Table : sessions        |  | Table : evenements_        |  |
-|  |-------------------------|  |          visibilite        |  |
-|  | id_session (PK)         |  | id_evenement (PK, auto)   |  |
-|  | type_appareil           |  | id_session (FK)            |  |
-|  | largeur_ecran           |  | id_contenu                 |  |
-|  | hauteur_ecran           |  | type_contenu               |  |
-|  | navigateur              |  | pourcentage_visibilite     |  |
-|  | page_consultee          |  | duree_exposition_ms        |  |
-|  | date_debut              |  | horodatage_debut           |  |
-|  +-------------------------+  | horodatage_fin             |  |
-|                               | date_enregistrement        |  |
-|                               +----------------------------+  |
-+---------------------------------------------------------------+
+|  +--------------------+   +-----------------------------+     |
+|  | Modeles            |   | Routes statistiques (API)   |     |
+|  | - session.py       |   | GET /api/statistiques/      |     |
+|  | - evenement.py     |   |     contenus                |     |
+|  +--------------------+   |     contenus/<id>           |     |
+|                           |     sessions                |     |
+|  +--------------------+   |     appareils               |     |
+|  | Utilitaires        |   |     navigateurs             |     |
+|  | - analyseur.py     |   +-----------------------------+     |
+|  +--------------------+          CORS active                  |
++-------------------------------|-------------------------------+
+                                |
+              Lecture / Ecriture |         HTTP GET (JSON + CORS)
+                                |                |
+                                v                |
++-------------------------------+                |
+|      BASE DE DONNEES SQLite   |                |
+|   donnees/visibilite.db       |                |
+|                               |                |
+|  +----------+ +------------+ |                |
+|  | sessions | | evenements | |                |
+|  +----------+ +------------+ |                |
++-------------------------------+                |
+                                                 v
+                          +------------------------------+
+                          |   DASHBOARD (port 5001)      |
+                          |                              |
+                          | - Application Flask separee  |
+                          | - Appelle les API du serveur |
+                          | - Affiche les graphiques     |
+                          |   (Chart.js)                 |
+                          | - Rafraichissement auto      |
+                          | - Indicateur de connexion    |
+                          +------------------------------+
 ```
 
 ---
@@ -143,8 +143,9 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 
 ### 3.4 Consultation (tableau de bord)
 
-8. **Requete des statistiques** -- Le tableau de bord (`/tableau-de-bord`)
-   charge les donnees en appelant simultanement quatre endpoints :
+8. **Requete des statistiques** -- Le dashboard (application separee sur le
+   port 5001) charge les donnees en appelant simultanement quatre endpoints
+   du serveur principal (port 5000) via CORS :
    - `GET /api/statistiques/contenus` -- statistiques agregees par contenu
    - `GET /api/statistiques/sessions` -- resume global (nombre de sessions,
      visibilite moyenne, duree moyenne)
@@ -171,7 +172,7 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 | Technologie | Utilisation |
 |-------------|-------------|
 | **HTML5** | Structure des pages (demo et tableau de bord), attributs `data-contenu-id` pour le marquage des contenus |
-| **CSS3** | Mise en forme des pages (`style_demo.css`, `style_tableau_de_bord.css`) |
+| **CSS3** | Mise en forme des pages (`style_demo.css`, `style_tableau_de_bord.css`), Google Fonts (Playfair Display, Inter), Font Awesome |
 | **JavaScript vanilla** | Logique de detection, collecte, envoi des donnees et rendu du tableau de bord -- aucun framework |
 | **IntersectionObserver API** | Detection native de la visibilite des elements dans le viewport avec seuils multiples |
 | **Chart.js** | Generation des graphiques interactifs dans le tableau de bord (barres, donut, camembert) |
@@ -182,6 +183,7 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 |-------------|-------------|
 | **Python 3.12** | Langage du serveur |
 | **Flask 3.x** | Framework web -- routage, blueprints, JSON, templates Jinja2 |
+| **Flask-CORS** | Gestion des requetes cross-origin (CORS) pour la communication entre le site et le dashboard |
 
 ### Base de donnees
 
@@ -220,57 +222,71 @@ Les éléments HTML doivent porter les attributs `data-contenu-id` (identifiant 
 ## 6. Structure des dossiers
 
 ```
-Projet_N4_CCC_Anthony_Kamoto/
+📁 Projet_N4_CCC_Anthony_Kamoto/
 |
-|-- serveur/                        # Code back-end Python/Flask
-|   |-- __init__.py
-|   |-- appli.py                    # Point d'entree de l'application Flask
-|   |-- config.py                   # Configuration (hote, port, chemin BDD)
-|   |-- base_de_donnees.py          # Connexion SQLite et creation des tables
+|-- 📁 serveur/                        # Serveur principal (port 5000)
+|   |-- 🐍 __init__.py
+|   |-- 🐍 appli.py                    # Point d'entree Flask + CORS
+|   |-- 🐍 config.py                   # Configuration (hote, port, chemin BDD)
+|   |-- 🐍 base_de_donnees.py          # Connexion SQLite et creation des tables
 |   |
-|   |-- modeles/                    # Couche d'acces aux donnees
-|   |   |-- __init__.py
-|   |   |-- session.py              # CRUD sessions
-|   |   |-- evenement.py            # CRUD evenements de visibilite
+|   |-- 📁 modeles/                    # Couche d'acces aux donnees
+|   |   |-- 🐍 __init__.py
+|   |   |-- 🐍 session.py              # CRUD sessions
+|   |   |-- 🐍 evenement.py            # CRUD evenements de visibilite
 |   |
-|   |-- routes/                     # Blueprints Flask (API + pages)
-|   |   |-- __init__.py
-|   |   |-- pages.py                # Routes HTML : /, /demo, /tableau-de-bord
-|   |   |-- collecte.py             # API collecte : /api/sessions, /api/evenements
-|   |   |-- statistiques.py         # API stats : /api/statistiques/*
+|   |-- 📁 routes/                     # Blueprints Flask (API + pages)
+|   |   |-- 🐍 __init__.py
+|   |   |-- 🐍 pages.py                # Routes HTML : /, /actualites
+|   |   |-- 🐍 collecte.py             # API collecte : /api/sessions, /api/evenements
+|   |   |-- 🐍 statistiques.py         # API stats : /api/statistiques/*
 |   |
-|   |-- utilitaires/                # Fonctions transversales
-|       |-- __init__.py
-|       |-- analyseur.py            # Calculs statistiques (agregations SQL)
+|   |-- 📁 utilitaires/                # Fonctions transversales
+|       |-- 🐍 __init__.py
+|       |-- 🐍 analyseur.py            # Calculs statistiques (agregations SQL)
 |
-|-- templates/                       # Templates HTML Jinja2
-|   |-- page_demo.html              # Landing page professionnelle — Blog/Forum sur l'accessibilité web
-|   |                               # (contient ~15 éléments trackés : bannières, images, vidéo, FAQ, CTA, widgets)
-|   |-- tableau_de_bord.html        # Tableau de bord des statistiques
+|-- 📁 dashboard/                      # Dashboard independant (port 5001)
+|   |-- 🐍 __init__.py
+|   |-- 🐍 appli.py                    # Point d'entree Flask du dashboard
+|   |-- 🐍 config.py                   # Configuration (port, URL serveur)
+|   |-- 📁 templates/
+|   |   |-- 🌐 tableau_de_bord.html    # Page du tableau de bord
+|   |-- 📁 static/
+|       |-- 📁 css/
+|       |   |-- 🎨 style_tableau_de_bord.css  # Styles du dashboard
+|       |-- 📁 js/
+|           |-- ⚡ tableau_de_bord.js          # Graphiques Chart.js + auto-refresh
 |
-|-- static/                          # Fichiers statiques (CSS, JS)
-|   |-- css/
-|   |   |-- style_demo.css          # Styles de la page de demo
-|   |   |-- style_tableau_de_bord.css  # Styles du tableau de bord
+|-- 📁 templates/                       # Templates HTML du site d'actualites
+|   |-- 🌐 page_demo.html              # Site d'actualites (21 elements surveilles)
+|
+|-- 📁 static/                          # Fichiers statiques du site d'actualites
+|   |-- 📁 css/
+|   |   |-- 🎨 style_demo.css          # Styles du site d'actualites
 |   |
-|   |-- js/
-|       |-- informations_contexte.js   # Detection appareil/navigateur/ecran
-|       |-- observateur_visibilite.js  # Observation via IntersectionObserver
-|       |-- collecteur_donnees.js      # Tampon, envoi par lots, sendBeacon
-|       |-- tableau_de_bord.js         # Graphiques Chart.js et affichage stats
+|   |-- 📁 js/
+|       |-- ⚡ informations_contexte.js   # Detection appareil/navigateur/ecran
+|       |-- ⚡ observateur_visibilite.js  # Observation via IntersectionObserver
+|       |-- ⚡ collecteur_donnees.js      # Tampon, envoi par lots, sendBeacon
 |
-|-- donnees/                        # Base de donnees SQLite (generee au lancement)
-|   |-- visibilite.db
+|-- 📁 donnees/                        # Base de donnees SQLite (generee au lancement)
+|   |-- 🗄️ visibilite.db
 |
-|-- tests/                          # Tests automatises (pytest)
-|   |-- test_base_de_donnees.py     # Tests de la couche base de donnees
-|   |-- test_routes_collecte.py     # Tests des routes de collecte
-|   |-- test_routes_statistiques.py # Tests des routes de statistiques
-|   |-- test_analyseur.py           # Tests du module d'analyse
+|-- 📁 tests/                          # Tests automatises (pytest, 30 tests)
+|   |-- 🐍 conftest.py                 # Configuration partagee des tests
+|   |-- 🐍 test_base_de_donnees.py     # Tests de la couche base de donnees
+|   |-- 🐍 test_routes_collecte.py     # Tests des routes de collecte
+|   |-- 🐍 test_routes_statistiques.py # Tests des routes de statistiques
+|   |-- 🐍 test_analyseur.py           # Tests du module d'analyse
+|   |-- 🐍 test_dashboard.py           # Tests du dashboard
 |
-|-- docs/                           # Documentation du projet
-|   |-- architecture.md             # Ce fichier
+|-- 📁 docs/                           # Documentation du projet
+|   |-- 📝 architecture.md             # Ce fichier
+|   |-- 📝 base_de_donnees.md          # Schema de la BDD
+|   |-- 📝 guide_installation.md       # Guide d'installation
+|   |-- 📝 rapport_synthese.md         # Rapport de synthese
 |
-|-- requirements.txt                # Dependances Python (flask)
-|-- Explication_projet.md           # Presentation generale du projet
+|-- 🪟 lancer.ps1                      # Script de lancement (Windows)
+|-- 🐧 lancer.sh                       # Script de lancement (macOS/Linux)
+|-- 📋 requirements.txt                # Dependances Python (flask, flask-cors, pytest)
 ```

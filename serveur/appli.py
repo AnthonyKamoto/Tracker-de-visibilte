@@ -10,6 +10,7 @@ import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from flask import Flask
+from flask_cors import CORS
 from serveur.config import HOTE, PORT, MODE_DEBUG, REPERTOIRE_BASE
 from serveur.base_de_donnees import initialiser_bdd
 
@@ -22,6 +23,9 @@ def creer_application():
         static_folder=os.path.join(REPERTOIRE_BASE, 'static'),
         static_url_path='/static'
     )
+
+    # Activer CORS pour permettre au dashboard de communiquer avec le serveur
+    CORS(appli, resources={r"/api/*": {"origins": "*"}})
 
     # Initialiser la base de donnees au demarrage
     initialiser_bdd()

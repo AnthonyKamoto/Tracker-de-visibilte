@@ -13,7 +13,7 @@ from serveur.appli import creer_application
 
 @pytest.fixture
 def client(bdd_temporaire):
-    """Client de test Flask avec des donnees de demo."""
+    """Client de test Flask avec des donnees de test."""
     appli = creer_application()
     appli.config['TESTING'] = True
     with appli.test_client() as c:
@@ -24,7 +24,7 @@ def client(bdd_temporaire):
             'largeur_ecran': 1920,
             'hauteur_ecran': 1080,
             'navigateur': 'Chrome 120',
-            'page_consultee': '/demo'
+            'page_consultee': '/actualites'
         })
         c.post('/api/sessions', json={
             'id_session': 'stat-s2',
@@ -32,7 +32,7 @@ def client(bdd_temporaire):
             'largeur_ecran': 375,
             'hauteur_ecran': 812,
             'navigateur': 'Safari 17',
-            'page_consultee': '/demo'
+            'page_consultee': '/actualites'
         })
         c.post('/api/evenements', json={
             'id_session': 'stat-s1',

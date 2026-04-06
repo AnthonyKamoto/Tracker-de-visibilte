@@ -1,4 +1,9 @@
-/* Style du tableau de bord */
+/* ==============================================
+   CCC — Tableau de bord
+   Design harmonise avec le site d'actualites
+   ============================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap");
 
 * {
     margin: 0;
@@ -7,16 +12,22 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     background-color: #f0f2f5;
     color: #333;
+    line-height: 1.6;
 }
 
 /* En-tête */
 .entete-dashboard {
     background: linear-gradient(135deg, #1a237e, #283593);
     color: white;
-    padding: 20px 30px;
+    padding: 18px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,8 +35,23 @@ body {
     gap: 15px;
 }
 
+.entete-gauche {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
 .entete-dashboard h1 {
-    font-size: 1.4rem;
+    font-family: "Inter", sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.entete-droite {
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
 .entete-dashboard .lien-demo {
@@ -34,12 +60,70 @@ body {
     background: rgba(255, 255, 255, 0.15);
     padding: 8px 16px;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 600;
     transition: background 0.3s;
 }
 
 .entete-dashboard .lien-demo:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+/* Badge de connexion */
+.badge-connexion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.12);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-connexion.connecte {
+    background: rgba(34, 197, 94, 0.2);
+}
+.badge-connexion.deconnecte {
+    background: rgba(239, 68, 68, 0.2);
+}
+
+.badge-point {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #aaa;
+}
+
+.badge-connexion.connecte .badge-point {
+    background: #22c55e;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.5);
+}
+
+.badge-connexion.deconnecte .badge-point {
+    background: #ef4444;
+}
+
+/* Toggle auto-refresh */
+.toggle-auto {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.toggle-auto input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #22c55e;
+    cursor: pointer;
+}
+
+.toggle-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    white-space: nowrap;
 }
 
 /* Filtres */
@@ -64,6 +148,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 0.85rem;
+    font-family: "Inter", sans-serif;
 }
 
 .bouton-actualiser {
@@ -74,6 +159,11 @@ body {
     border-radius: 6px;
     cursor: pointer;
     font-size: 0.85rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     transition: background 0.3s;
 }
 
@@ -99,23 +189,40 @@ body {
 .carte-resume {
     background: white;
     border-radius: 10px;
-    padding: 20px;
+    padding: 22px 20px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     text-align: center;
+    position: relative;
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.carte-resume:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.carte-icone {
+    font-size: 1.4rem;
+    color: #9fa8da;
+    margin-bottom: 8px;
 }
 
 .carte-resume .valeur {
+    font-family: "Playfair Display", Georgia, serif;
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 800;
     color: #1a237e;
     margin-bottom: 4px;
 }
 
 .carte-resume .libelle {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #777;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    font-weight: 500;
 }
 
 /* Grille de graphiques */
@@ -134,7 +241,9 @@ body {
 }
 
 .carte-graphique h3 {
-    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: #333;
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -161,7 +270,9 @@ body {
 }
 
 .section-tableau h3 {
-    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
     color: #333;
     margin-bottom: 15px;
     padding-bottom: 10px;
@@ -178,7 +289,7 @@ body {
     color: #1a237e;
     padding: 10px 14px;
     text-align: left;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 600;
     cursor: pointer;
 }
@@ -200,9 +311,55 @@ body {
 /* État vide */
 .etat-vide {
     text-align: center;
-    padding: 40px;
+    padding: 50px 20px;
     color: #999;
     font-size: 0.95rem;
+}
+
+.etat-vide-conteneur {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 50px 20px;
+}
+
+.etat-vide-icone {
+    font-size: 3rem;
+    color: #c5cae9;
+}
+
+.etat-vide-titre {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #555;
+}
+
+.etat-vide-texte {
+    font-size: 0.9rem;
+    color: #999;
+    max-width: 400px;
+    line-height: 1.6;
+}
+
+.etat-vide-lien {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 20px;
+    background: #1a237e;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 4px;
+    transition: background 0.3s;
+}
+
+.etat-vide-lien:hover {
+    background: #283593;
 }
 
 /* Pied de page */
@@ -241,6 +398,14 @@ body {
 
     .entete-dashboard {
         padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .entete-gauche {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
     }
 
     .entete-dashboard h1 {
@@ -270,7 +435,11 @@ body {
     }
 
     .carte-resume .libelle {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
+    }
+
+    .carte-icone {
+        font-size: 1.1rem;
     }
 
     .carte-graphique {
@@ -298,8 +467,15 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .entete-dashboard {
+    .entete-droite {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .entete-dashboard .lien-demo {
+        width: 100%;
         text-align: center;
     }
 
@@ -310,6 +486,7 @@ body {
 
     .bouton-actualiser {
         width: 100%;
+        justify-content: center;
     }
 
     .carte-resume .valeur {

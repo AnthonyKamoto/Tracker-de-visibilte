@@ -29,7 +29,7 @@ def test_creer_session(client):
         'largeur_ecran': 1920,
         'hauteur_ecran': 1080,
         'navigateur': 'Chrome 120',
-        'page_consultee': '/demo'
+        'page_consultee': '/actualites'
     })
     assert reponse.status_code == 201
     donnees = reponse.get_json()

@@ -3,256 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessibilité Web — Fondation CCC</title>
+    <title>CCC Actualités — L'information numérique et éducative</title>
     <link rel="stylesheet" href="/static/css/style_demo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-    <!-- Header / Navigation -->
-    <header>
-        <div class="container">
-            <div class="logo">🚀 CCC Tracking</div>
-            <nav>
-                <ul>
-                    <li><a href="#hero">Accueil</a></li>
-                    <li><a href="#articles">Articles</a></li>
-                    <li><a href="#ressources">Ressources</a></li>
-                    <li><a href="/tableau-de-bord">Dashboard</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<!-- ===== Barre d'infos ===== -->
+<div class="barre-info">
+    <div class="conteneur">
+        <span id="date-actuelle"></span>
+        <script>
+            (function () {
+                var jours = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+                var mois = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+                var d = new Date();
+                document.getElementById('date-actuelle').textContent =
+                    jours[d.getDay()] + ' ' + d.getDate() + ' ' + mois[d.getMonth()] + ' ' + d.getFullYear() + ' — Kinshasa, RDC';
+            })();
+        </script>
+        <a href="http://localhost:5001">Tableau de bord analytique &rarr;</a>
+    </div>
+</div>
 
-    <!-- Main Content -->
-    <main class="container">
+<!-- ===== Header ===== -->
+<header class="entete">
+    <div class="conteneur">
+        <div class="logo">CCC <span>Actualités</span></div>
+        <button class="btn-menu" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-liens">
+            <li><a href="#technologie">Technologie</a></li>
+            <li><a href="#education">Éducation</a></li>
+            <li><a href="#reportage">Reportage</a></li>
+            <li><a href="#opinion">Opinion</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="http://localhost:5001" class="btn-dashboard">Dashboard &rarr;</a>
+    </div>
+</header>
 
-        <!-- Hero Banner -->
-        <section class="section-contenu" id="hero" data-contenu-id="hero-banner" data-type-contenu="banniere">
-            <div class="etiquette">Bienvenue</div>
-            <div class="hero-banniere">
-                <h1>Pourquoi l'accessibilité web compte vraiment</h1>
-                <p>Découvrez comment les utilisateurs interagissent réellement avec le contenu web en conditions réelles</p>
+<!-- ===== Breaking News ===== -->
+<div class="breaking" data-contenu-id="breaking-news" data-type-contenu="banniere">
+    <div class="conteneur">
+        <span class="breaking-badge">Flash</span>
+        <span class="breaking-texte">La Fondation CCC lance son programme de mesure de visibilité web pour améliorer l'expérience des contenus éducatifs en Afrique francophone</span>
+    </div>
+</div>
+
+<div class="espace"></div>
+
+<main class="conteneur">
+
+    <!-- ===== ARTICLE UNE ===== -->
+    <section class="une" id="technologie">
+        <article class="une-principale" data-contenu-id="article-une" data-type-contenu="texte">
+            <img class="une-image"
+                 src="https://picsum.photos/seed/newstech/900/500"
+                 alt="Innovation technologique en Afrique"
+                 loading="lazy">
+            <div class="une-contenu">
+                <span class="categorie cat-technologie">Technologie</span>
+                <h2 class="une-titre">L'Afrique subsaharienne, nouveau terrain d'innovation pour les technologies éducatives</h2>
+                <p class="une-extrait">Avec une population jeune en pleine croissance numérique, le continent africain devient un laboratoire d'innovation pour les EdTech. De Kinshasa à Nairobi, les initiatives se multiplient pour démocratiser l'accès au code et aux compétences numériques.</p>
+                <p class="meta">Par <strong>Marie Kabongo</strong> &mdash; 5 avril 2026 &bull; 8 min de lecture</p>
             </div>
-        </section>
+        </article>
 
-        <div class="separateur"></div>
-
-        <!-- Section Intro -->
-        <section class="section-contenu" data-contenu-id="intro-principal" data-type-contenu="texte">
-            <div class="etiquette">Introduction</div>
-            <h2>Mission de la Fondation CCC</h2>
-            <p>La Fondation Children Coding Club accompagne les jeunes dans leur apprentissage du numérique. Notre mission est de rendre la programmation accessible à tous, dès le plus jeune âge. L'accessibilité web n'est pas seulement une conformité légale — c'est une nécessité morale pour créer un internet inclusif où chacun peut participer, apprendre et innover.</p>
-            <p>Cette page de démonstration mesure comment le contenu web est réellement vu par les visiteurs. Chaque élément que vous avez sur votre écran est surveillé en temps réel par notre système de tracking avancé. Scrollez à travers la page pour découvrir les différents types de contenus et voir comment ils sont suivis.</p>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- Widget Statistiques -->
-        <section class="section-contenu widget" data-contenu-id="widget-stats" data-type-contenu="widget">
-            <div class="etiquette">Statistiques clés</div>
-            <div class="widget-stats">
-                <div class="stat-item">
-                    <span class="nombre">2.5M+</span>
-                    <span class="label">Pages visitées/mois</span>
+        <aside class="une-laterale">
+            <article class="article-mini" data-contenu-id="mini-article-1" data-type-contenu="image">
+                <img src="https://picsum.photos/seed/school1/300/200" alt="École numérique" loading="lazy">
+                <div class="article-mini-contenu">
+                    <span class="categorie cat-education">Éducation</span>
+                    <h3 class="article-mini-titre">12 000 élèves formés au code en RDC en 2025</h3>
+                    <p class="meta">3 avril 2026</p>
                 </div>
-                <div class="stat-item">
-                    <span class="nombre">92%</span>
-                    <span class="label">Taux de visibilité moyen</span>
+            </article>
+            <article class="article-mini" data-contenu-id="mini-article-2" data-type-contenu="image">
+                <img src="https://picsum.photos/seed/robot1/300/200" alt="Robotique éducative" loading="lazy">
+                <div class="article-mini-contenu">
+                    <span class="categorie cat-science">Science</span>
+                    <h3 class="article-mini-titre">Robotique éducative : un levier pour l'apprentissage inclusif</h3>
+                    <p class="meta">2 avril 2026</p>
                 </div>
-                <div class="stat-item">
-                    <span class="nombre">3.2s</span>
-                    <span class="label">Durée moyenne exposition</span>
+            </article>
+            <article class="article-mini" data-contenu-id="mini-article-3" data-type-contenu="image">
+                <img src="https://picsum.photos/seed/web2026/300/200" alt="Accessibilité web" loading="lazy">
+                <div class="article-mini-contenu">
+                    <span class="categorie cat-societe">Société</span>
+                    <h3 class="article-mini-titre">Accessibilité web : où en est l'Afrique francophone ?</h3>
+                    <p class="meta">1er avril 2026</p>
                 </div>
-                <div class="stat-item">
-                    <span class="nombre">15+</span>
-                    <span class="label">Pays représentés</span>
-                </div>
-            </div>
-        </section>
+            </article>
+        </aside>
+    </section>
 
-        <div class="separateur"></div>
-
-        <!-- Article Vedette -->
-        <section class="section-contenu article-vedette" data-contenu-id="article-vedette" data-type-contenu="texte" id="articles">
-            <div class="etiquette">Article vedette</div>
-            <h2>Les principes fondamentaux de l'accessibilité web</h2>
-            <p>L'accessibilité web est aujourd'hui au cœur des préoccupations des développeurs modernes. Mais qu'est-ce que cela signifie réellement ? L'accessibilité web signifie que vos pages web, votre contenu et vos applications sont conçus pour être utilisés par tout le monde — quels que soient leurs capacités physiques, cognitives ou technologiques.</p>
-
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 300'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233b82f6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%237c3aed;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='500' height='300' fill='url(%23grad)'/%3E%3Ctext x='250' y='150' font-size='48' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E♿ Accessibilité</text%3E%3C/svg%3E" alt="Accessibilité web">
-
-            <p>Les quatre principes clés de l'accessibilité web sont la perceptibilité, l'opérabilité, la compréhensibilité et la robustesse (POUR). Ces principes garantissent que les personnes handicapées peuvent naviguer et interagir avec le web de manière significative.</p>
-            <p>En mesurant la visibilité réelle de vos contenus, vous pouvez identifier quels éléments importants sont véritablement vus par vos utilisateurs, et ajuster votre stratégie d'accessibilité en conséquence.</p>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- Bannière Pub #1 -->
-        <section class="section-contenu banniere-pub" data-contenu-id="pub-tech-1" data-type-contenu="banniere">
-            <div class="etiquette">Publicité</div>
-            <h3>🎓 Formation Web Complète</h3>
-            <p>Apprenez HTML, CSS, JavaScript et bien plus avec notre méthode pédagogique innovante</p>
-            <a href="#" class="cta-button">Découvrir notre formation →</a>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- Galerie Images -->
-        <section class="section-contenu" data-contenu-id="galerie-images" data-type-contenu="galerie">
-            <div class="etiquette">Galerie</div>
-            <h2>Nos projets éducatifs</h2>
-            <div class="galerie-images">
-                <div class="image-card" data-contenu-id="image-coding-1" data-type-contenu="image">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2310b981;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23059669;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g1)'/%3E%3Ctext x='200' y='150' font-size='56' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E&lt;/&gt;</text%3E%3C/svg%3E" alt="Développement inclusif">
-                    <caption>Développement Web Inclusif</caption>
-                </div>
-                <div class="image-card" data-contenu-id="image-coding-2" data-type-contenu="image">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f97316;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23ea580c;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g2)'/%3E%3Ctext x='200' y='150' font-size='56' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E🤖</text%3E%3C/svg%3E" alt="Robotique pédagogique">
-                    <caption>Initiation à la Robotique</caption>
-                </div>
-                <div class="image-card" data-contenu-id="image-coding-3" data-type-contenu="image">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%235b21b6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%237c3aed;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='400' height='300' fill='url(%23g3)'/%3E%3Ctext x='200' y='150' font-size='56' font-weight='bold' fill='white' text-anchor='middle' dy='.3em'%3E🎨</text%3E%3C/svg%3E" alt="Design interactif">
-                    <caption>Design UI/UX Accessible</caption>
-                </div>
-            </div>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- Bannière Pub #2 -->
-        <section class="section-contenu banniere-pub" data-contenu-id="pub-tech-2" data-type-contenu="banniere">
-            <div class="etiquette">Publicité</div>
-            <h3>💻 Partenaires technologues</h3>
-            <p>Rejoignez notre réseau d'entreprises engagées pour l'éducation numérique inclusive</p>
-            <a href="#" class="cta-button">Devenir partenaire →</a>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- Vidéo Section -->
-        <section class="section-contenu" data-contenu-id="video-testimonial" data-type-contenu="video">
-            <div class="etiquette">Vidéo</div>
-            <h2>Témoignages de nos apprenants</h2>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Témoignages CCC" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <p>Découvrez les histoires inspirantes de nos jeunes apprenants et comment ils ont transformé leur relation avec la technologie grâce à nos programmes.</p>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- Section Ressources -->
-        <section class="section-contenu" data-contenu-id="section-ressources" data-type-contenu="texte" id="ressources">
-            <div class="etiquette">Ressources</div>
-            <h2>Outils et ressources pratiques</h2>
-            <p>Pour mettre en place une stratégie d'accessibilité web efficace, plusieurs ressources et outils s'offrent à vous :</p>
-            <ul>
-                <li><strong>Validateurs WCAG :</strong> Des outils comme WAVE et Axe DevTools permettent de vérifier la conformité aux normes WCAG</li>
-                <li><strong>Lecteurs d'écran :</strong> NVDA, JAWS et VoiceOver pour tester l'expérience utilisateur des personnes malvoyantes</li>
-                <li><strong>Extensions navigateur :</strong> Lighthouse et des outils de contraste pour évaluer rapidement vos pages</li>
-                <li><strong>Métriques de visibilité :</strong> Notre système de tracking pour mesurer l'engagement réel du contenu</li>
-            </ul>
-            <p>Ces ressources vous aideront à créer un web plus accessible et inclusif pour tous les utilisateurs, quel que soit leur contexte.</p>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- Bannière Pub #3 -->
-        <section class="section-contenu banniere-pub" data-contenu-id="pub-tech-3" data-type-contenu="banniere">
-            <div class="etiquette">Publicité</div>
-            <h3>📊 Analytics Avancée</h3>
-            <p>Mesurez précisément la visibilité et l'engagement de chaque élément de votre site</p>
-            <a href="#" class="cta-button">Essayer gratuitement →</a>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- CTA Section -->
-        <section class="section-contenu cta-section" data-contenu-id="cta-principal" data-type-contenu="cta">
-            <div class="etiquette">Appel à l'action</div>
-            <h2>Prêt à transformer votre expérience web ?</h2>
-            <p>Rejoignez des milliers d'organisations qui utilisent nos outils pour créer des expériences web plus accessibles et inclusives</p>
-            <a href="#" class="cta-principal">Commencer maintenant</a>
-        </section>
-
-        <div class="separateur"></div>
-
-        <!-- FAQ Section -->
-        <section class="section-contenu" data-contenu-id="faq-section" data-type-contenu="faq">
-            <div class="etiquette">Questions fréquentes</div>
-            <h2>FAQ — Accessibility & Tracking</h2>
-            <div class="faq-section">
-                <div class="faq-item">
-                    <div class="faq-title" data-contenu-id="faq-q1" data-type-contenu="faq-item">
-                        Q: Comment fonctionne le tracking de visibilité ?
-                    </div>
-                    <div class="faq-answer">
-                        Nous utilisons l'API IntersectionObserver du navigateur pour détecter quand les éléments entrent et sortent du viewport. Cette API offre une excellente performance et une grande précision sans impacter les performances de la page.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-title" data-contenu-id="faq-q2" data-type-contenu="faq-item">
-                        Q: Quelles données sont collectées ?
-                    </div>
-                    <div class="faq-answer">
-                        Nous collectons le pourcentage de visibilité, la durée d'exposition, le type d'appareil, le navigateur, et les dimensions de l'écran. Aucune donnée personnelle n'est stockée — tout est totalement anonyme et conforme au RGPD.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-title" data-contenu-id="faq-q3" data-type-contenu="faq-item">
-                        Q: Quel est l'impact sur les performances ?
-                    </div>
-                    <div class="faq-answer">
-                        L'impact est minimal. IntersectionObserver est optimisé par les navigateurs modernes et ne crée pas de reflow. Les données sont envoyées par lots toutes les 3 secondes pour minimiser les requêtes réseau.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-title" data-contenu-id="faq-q4" data-type-contenu="faq-item">
-                        Q: Comment les données sont-elles sécurisées ?
-                    </div>
-                    <div class="faq-answer">
-                        Les données transitent en HTTPS et sont stockées dans une base de données SQLite sécurisée. Aucun tiers ne peut accéder aux données collectées sans permission explicite.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-title" data-contenu-id="faq-q5" data-type-contenu="faq-item">
-                        Q: Puis-je tester sur l'ensemble du web ?
-                    </div>
-                    <div class="faq-answer">
-                        Oui ! Notre système est agnostique au contenu. Tant que vous ajoutez les attributs data-contenu-id et data-type-contenu à vos éléments HTML, ils seront automatiquement suivis et mesurés.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="separateur"></div>
-
-    </main>
-
-    <!-- Tracking Indicator -->
-    <div class="indicateur-suivi">
-        ✓ Tracking actif
+    <!-- ===== BANNIÈRE PUB #1 ===== -->
+    <div class="banniere-pub" data-contenu-id="pub-formation" data-type-contenu="banniere">
+        <div class="pub-marque">CCC Academy</div>
+        <div class="pub-titre">Formation Développement Web — Session Juin 2026</div>
+        <p>12 semaines intensives pour maîtriser HTML, CSS, JavaScript et Python. Inscription ouverte.</p>
+        <a href="#" class="btn-pub">S'inscrire maintenant &rarr;</a>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p><strong>Fondation Children Coding Club</strong> — Système de mesure de visibilité web — 2026</p>
-        <p><a href="/tableau-de-bord">Voir le tableau de bord →</a></p>
-    </footer>
+    <!-- ===== WIDGET CHIFFRES ===== -->
+    <div class="widget-chiffres" data-contenu-id="widget-stats" data-type-contenu="widget">
+        <div class="chiffre-boite">
+            <span class="chiffre-nombre">12 400</span>
+            <span class="chiffre-label">Élèves formés</span>
+        </div>
+        <div class="chiffre-boite">
+            <span class="chiffre-nombre">87%</span>
+            <span class="chiffre-label">Taux de complétion</span>
+        </div>
+        <div class="chiffre-boite">
+            <span class="chiffre-nombre">6</span>
+            <span class="chiffre-label">Pays couverts</span>
+        </div>
+        <div class="chiffre-boite">
+            <span class="chiffre-nombre">340+</span>
+            <span class="chiffre-label">Mentors actifs</span>
+        </div>
+    </div>
 
-    <!-- Tracking Scripts -->
-    <script src="/static/js/informations_contexte.js"></script>
-    <script src="/static/js/collecteur_donnees.js"></script>
-    <script src="/static/js/observateur_visibilite.js"></script>
+    <div class="espace"></div>
 
-    <!-- FAQ Toggle Script -->
-    <script>
-        document.querySelectorAll('.faq-title').forEach(title => {
-            title.addEventListener('click', function() {
-                const item = this.parentElement;
-                item.classList.toggle('active');
-            });
+    <!-- ===== GRILLE D'ARTICLES ===== -->
+    <h2 class="titre-section" id="education">Éducation & Numérique</h2>
+    <div class="grille-articles">
+        <article class="carte-article" data-contenu-id="article-grid-1" data-type-contenu="image">
+            <img src="https://picsum.photos/seed/coding101/600/400" alt="Cours de programmation" loading="lazy">
+            <div class="carte-article-contenu">
+                <span class="categorie cat-education">Éducation</span>
+                <h3 class="carte-article-titre">Python, premier langage enseigné dans les écoles congolaises partenaires</h3>
+                <p class="carte-article-extrait">Le choix de Python comme premier langage s'impose par sa lisibilité et son adoption massive dans la data science et l'intelligence artificielle.</p>
+                <p class="meta">30 mars 2026 &bull; 5 min</p>
+            </div>
+        </article>
+        <article class="carte-article" data-contenu-id="article-grid-2" data-type-contenu="image">
+            <img src="https://picsum.photos/seed/girl-code/600/400" alt="Filles et code" loading="lazy">
+            <div class="carte-article-contenu">
+                <span class="categorie cat-societe">Société</span>
+                <h3 class="carte-article-titre">Girls Who Code : l'initiative qui change la donne en Afrique centrale</h3>
+                <p class="carte-article-extrait">Le programme vise à réduire l'écart de genre dans les métiers du numérique en formant 5 000 jeunes filles d'ici 2028.</p>
+                <p class="meta">28 mars 2026 &bull; 6 min</p>
+            </div>
+        </article>
+        <article class="carte-article" data-contenu-id="article-grid-3" data-type-contenu="image">
+            <img src="https://picsum.photos/seed/hackathon/600/400" alt="Hackathon" loading="lazy">
+            <div class="carte-article-contenu">
+                <span class="categorie cat-technologie">Technologie</span>
+                <h3 class="carte-article-titre">Hackathon CCC 2026 : les résultats dépassent les attentes</h3>
+                <p class="carte-article-extrait">72 heures de développement intense ont produit 15 prototypes fonctionnels, dont 3 sélectionnés pour un financement.</p>
+                <p class="meta">25 mars 2026 &bull; 4 min</p>
+            </div>
+        </article>
+    </div>
+
+    <!-- ===== BANNIÈRE PUB #2 ===== -->
+    <div class="banniere-pub" data-contenu-id="pub-partenaires" data-type-contenu="banniere">
+        <div class="pub-marque">Partenariats</div>
+        <div class="pub-titre">Devenez partenaire technologique de la Fondation CCC</div>
+        <p>Soutenez l'éducation numérique inclusive et gagnez en visibilité auprès de la communauté tech africaine.</p>
+        <a href="#" class="btn-pub">Nous contacter &rarr;</a>
+    </div>
+
+    <div class="espace"></div>
+
+    <!-- ===== VIDÉO REPORTAGE ===== -->
+    <h2 class="titre-section" id="reportage">Reportage vidéo</h2>
+    <div class="section-video" data-contenu-id="video-reportage" data-type-contenu="video">
+        <div class="video-conteneur">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    title="Reportage CCC"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+            <span class="categorie cat-education">Reportage</span>
+            <h3>Immersion dans un atelier de code pour enfants à Kinshasa</h3>
+            <p>Notre équipe a suivi pendant une semaine les jeunes apprenants du centre CCC de Kinshasa. Un documentaire sur l'impact concret de l'éducation numérique dans les quartiers populaires.</p>
+        </div>
+    </div>
+
+    <div class="espace"></div>
+
+    <!-- ===== ÉDITORIAL / OPINION ===== -->
+    <h2 class="titre-section" id="opinion">Opinion</h2>
+    <article class="editorial" data-contenu-id="editorial-opinion" data-type-contenu="texte">
+        <span class="categorie cat-opinion">Tribune</span>
+        <blockquote>« La mesure de visibilité web n'est pas qu'un outil marketing — c'est un instrument de transparence pour les contenus éducatifs. »</blockquote>
+        <p>Dans un contexte où les contenus numériques se multiplient exponentiellement, savoir si un contenu pédagogique est réellement vu par son public cible devient un enjeu majeur. Les métriques de visibilité permettent d'optimiser le placement des ressources éducatives et de garantir que les investissements en contenu produisent un impact réel.</p>
+        <p>Notre prototype de tracker de visibilité démontre qu'il est possible de mesurer ces interactions avec précision, sans compromettre la vie privée des utilisateurs. Zéro cookie, zéro donnée personnelle — uniquement des métriques d'engagement anonymes et agrégées.</p>
+        <div class="editorial-auteur">
+            <img src="https://picsum.photos/seed/auteur1/100/100" alt="Monsieur Norman" loading="lazy">
+            <div>
+                <div class="editorial-auteur-nom">Monsieur Norman</div>
+                <div class="editorial-auteur-role">Directeur de la Fondation CCC</div>
+            </div>
+        </div>
+    </article>
+
+    <div class="espace"></div>
+
+    <!-- ===== BANNIÈRE PUB #3 ===== -->
+    <div class="banniere-pub" data-contenu-id="pub-analytics" data-type-contenu="banniere">
+        <div class="pub-marque">CCC Insight</div>
+        <div class="pub-titre">Mesurez la visibilité réelle de vos contenus web</div>
+        <p>Solution open-source de tracking de visibilité — IntersectionObserver API, respect de la vie privée, dashboard intégré.</p>
+        <a href="http://localhost:5001" class="btn-pub">Voir les statistiques &rarr;</a>
+    </div>
+
+    <div class="espace"></div>
+
+    <!-- ===== NEWSLETTER / CTA ===== -->
+    <section class="newsletter" data-contenu-id="cta-newsletter" data-type-contenu="cta">
+        <h2>Restez informés de l'actualité numérique</h2>
+        <p>Recevez chaque semaine notre sélection d'articles sur l'éducation numérique, la technologie et l'accessibilité web.</p>
+        <form class="newsletter-form" onsubmit="return false;">
+            <input type="email" placeholder="votre@email.com" aria-label="Adresse email">
+            <button type="submit" class="btn-newsletter">S'abonner</button>
+        </form>
+    </section>
+
+    <div class="espace"></div>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section-faq" id="faq" data-contenu-id="faq-section" data-type-contenu="faq">
+        <h2 class="titre-section">Questions fréquentes</h2>
+        <div class="faq-item" data-contenu-id="faq-q1" data-type-contenu="faq-item">
+            <div class="faq-question">
+                Comment fonctionne le système de mesure de visibilité ?
+                <span class="faq-chevron">&#9660;</span>
+            </div>
+            <div class="faq-reponse">
+                <div class="faq-reponse-contenu">Le système utilise l'API IntersectionObserver du navigateur pour détecter quand un contenu entre et sort du viewport. Il mesure le pourcentage visible et la durée d'exposition en millisecondes, puis envoie ces données au serveur par lots.</div>
+            </div>
+        </div>
+        <div class="faq-item" data-contenu-id="faq-q2" data-type-contenu="faq-item">
+            <div class="faq-question">
+                Quelles données sont collectées par le tracker ?
+                <span class="faq-chevron">&#9660;</span>
+            </div>
+            <div class="faq-reponse">
+                <div class="faq-reponse-contenu">Uniquement des métriques techniques anonymes : pourcentage de visibilité, durée d'exposition, type d'appareil, navigateur et résolution d'écran. Aucune donnée personnelle, aucun cookie, totalement conforme au RGPD.</div>
+            </div>
+        </div>
+        <div class="faq-item" data-contenu-id="faq-q3" data-type-contenu="faq-item">
+            <div class="faq-question">
+                Le tracking ralentit-il la page ?
+                <span class="faq-chevron">&#9660;</span>
+            </div>
+            <div class="faq-reponse">
+                <div class="faq-reponse-contenu">Non. IntersectionObserver est une API native optimisée par les navigateurs. Les données sont envoyées par lots toutes les 3 secondes, ce qui minimise les requêtes réseau et n'a aucun impact perceptible sur les performances.</div>
+            </div>
+        </div>
+        <div class="faq-item" data-contenu-id="faq-q4" data-type-contenu="faq-item">
+            <div class="faq-question">
+                Où puis-je consulter les résultats de visibilité ?
+                <span class="faq-chevron">&#9660;</span>
+            </div>
+            <div class="faq-reponse">
+                <div class="faq-reponse-contenu">Le tableau de bord intégré affiche en temps réel les graphiques de visibilité moyenne par contenu, la durée d'exposition, la répartition par appareil et par navigateur, ainsi qu'un tableau récapitulatif complet.</div>
+            </div>
+        </div>
+        <div class="faq-item" data-contenu-id="faq-q5" data-type-contenu="faq-item">
+            <div class="faq-question">
+                Le système fonctionne-t-il sur mobile ?
+                <span class="faq-chevron">&#9660;</span>
+            </div>
+            <div class="faq-reponse">
+                <div class="faq-reponse-contenu">Oui. Le site est entièrement responsive et le tracking fonctionne sur tous les appareils modernes : ordinateurs, tablettes et smartphones. Le type d'appareil est automatiquement détecté et enregistré dans les statistiques.</div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== Indicateur ===== -->
+<div class="indicateur-suivi">
+    <span class="point-vert"></span> Tracking actif
+</div>
+
+<!-- ===== Bouton retour en haut ===== -->
+<button class="btn-haut" id="btn-haut" aria-label="Retour en haut">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- ===== Footer ===== -->
+<footer class="pied">
+    <div class="conteneur">
+        <div class="pied-grille">
+            <div class="pied-colonne">
+                <div class="pied-logo">CCC <span>Actualités</span></div>
+                <p class="pied-description">CCC Actualités est le portail d'information de la Fondation Children Coding Club. Nous couvrons l'actualité du numérique, de l'éducation et de l'innovation en Afrique francophone.</p>
+            </div>
+            <div class="pied-colonne">
+                <h4 class="pied-titre">Rubriques</h4>
+                <ul class="pied-liens">
+                    <li><a href="#technologie">Technologie</a></li>
+                    <li><a href="#education">Éducation</a></li>
+                    <li><a href="#reportage">Reportage</a></li>
+                    <li><a href="#opinion">Opinion</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="pied-colonne">
+                <h4 class="pied-titre">Liens utiles</h4>
+                <ul class="pied-liens">
+                    <li><a href="http://localhost:5001">Tableau de bord</a></li>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="pied-colonne">
+                <h4 class="pied-titre">Contact</h4>
+                <ul class="pied-contact">
+                    <li>Kinshasa, RDC</li>
+                    <li>contact@ccc-actualites.cd</li>
+                    <li>+243 81 234 5678</li>
+                </ul>
+                <div class="pied-reseaux">
+                    <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" title="Twitter / X"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="pied-bas">
+            <span>&copy; 2026 Fondation Children Coding Club. Tous droits réservés.</span>
+            <span>Kinshasa, République Démocratique du Congo</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== Scripts de tracking ===== -->
+<script src="/static/js/informations_contexte.js"></script>
+<script src="/static/js/collecteur_donnees.js"></script>
+<script src="/static/js/observateur_visibilite.js"></script>
+
+<!-- ===== FAQ Toggle + Hamburger + Retour en haut ===== -->
+<script>
+    // FAQ
+    document.querySelectorAll('.faq-question').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            this.closest('.faq-item').classList.toggle('ouvert');
         });
-    </script>
+    });
+
+    // Menu hamburger
+    document.querySelector('.btn-menu').addEventListener('click', function () {
+        this.classList.toggle('actif');
+        document.querySelector('.nav-liens').classList.toggle('ouvert');
+    });
+
+    // Bouton retour en haut
+    var btnHaut = document.getElementById('btn-haut');
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 400) {
+            btnHaut.classList.add('visible');
+        } else {
+            btnHaut.classList.remove('visible');
+        }
+    });
+    btnHaut.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
 
 </body>
 </html>
