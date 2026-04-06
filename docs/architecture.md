@@ -181,7 +181,7 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 
 | Technologie | Utilisation |
 |-------------|-------------|
-| **Python 3.12** | Langage du serveur |
+| **Python 3.10+** | Langage du serveur |
 | **Flask 3.x** | Framework web -- routage, blueprints, JSON, templates Jinja2 |
 | **Flask-CORS** | Gestion des requetes cross-origin (CORS) pour la communication entre le site et le dashboard |
 

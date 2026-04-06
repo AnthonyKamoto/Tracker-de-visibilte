@@ -99,3 +99,82 @@ def test_enregistrer_evenements_vides(client):
         'evenements': []
     })
     assert reponse.status_code == 400
+
+
+def test_enregistrer_evenements_session_inexistante(client):
+    """POST /api/evenements avec session inexistante doit retourner erreur 404."""
+    reponse = client.post('/api/evenements', json={
+        'id_session': 'session-qui-nexiste-pas',
+        'evenements': [
+            {'id_contenu': 'banniere-1', 'pourcentage_visibilite': 0.5}
+        ]
+    })
+    assert reponse.status_code == 404
+
+
+def test_pourcentage_superieur_a_1(client):
+    """pourcentage_visibilite > 1 doit retourner erreur 400."""
+    client.post('/api/sessions', json={
+        'id_session': 'test-pv',
+        'type_appareil': 'ordinateur'
+    })
+    reponse = client.post('/api/evenements', json={
+        'id_session': 'test-pv',
+        'evenements': [
+            {'id_contenu': 'banniere-1', 'pourcentage_visibilite': 1.5}
+        ]
+    })
+    assert reponse.status_code == 400
+
+
+def test_pourcentage_negatif(client):
+    """pourcentage_visibilite negatif doit retourner erreur 400."""
+    client.post('/api/sessions', json={
+        'id_session': 'test-pv2',
+        'type_appareil': 'ordinateur'
+    })
+    reponse = client.post('/api/evenements', json={
+        'id_session': 'test-pv2',
+        'evenements': [
+            {'id_contenu': 'banniere-1', 'pourcentage_visibilite': -0.1}
+        ]
+    })
+    assert reponse.status_code == 400
+
+
+def test_largeur_ecran_flottante(client):
+    """largeur_ecran avec valeur flottante doit retourner erreur 400."""
+    reponse = client.post('/api/sessions', json={
+        'id_session': 'test-float',
+        'type_appareil': 'ordinateur',
+        'largeur_ecran': 1920.5
+    })
+    assert reponse.status_code == 400
+
+
+def test_id_contenu_trop_long(client):
+    """id_contenu depassant 256 caracteres doit retourner erreur 400."""
+    client.post('/api/sessions', json={
+        'id_session': 'test-long',
+        'type_appareil': 'ordinateur'
+    })
+    reponse = client.post('/api/evenements', json={
+        'id_session': 'test-long',
+        'evenements': [
+            {'id_contenu': 'x' * 257, 'pourcentage_visibilite': 0.5}
+        ]
+    })
+    assert reponse.status_code == 400
+
+
+def test_page_actualites(client):
+    """GET /actualites doit retourner 200."""
+    reponse = client.get('/actualites')
+    assert reponse.status_code == 200
+
+
+def test_redirection_racine(client):
+    """GET / doit rediriger vers /actualites."""
+    reponse = client.get('/')
+    assert reponse.status_code in (301, 302)
+    assert '/actualites' in reponse.headers.get('Location', '')
