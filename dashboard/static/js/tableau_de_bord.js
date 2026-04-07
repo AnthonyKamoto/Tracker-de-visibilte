@@ -321,12 +321,12 @@
                     "</td><td>" +
                     echapper(d.type_contenu) +
                     "</td><td>" +
-                    d.nombre_vues +
+                    echapper(d.nombre_vues) +
                     "</td><td>" +
-                    (d.duree_moyenne_ms / 1000).toFixed(1) +
+                    (d.duree_moyenne_ms != null ? (d.duree_moyenne_ms / 1000).toFixed(1) : "-") +
                     "</td><td>" +
-                    (d.visibilite_moyenne * 100).toFixed(0) +
-                    " %</td></tr>"
+                    (d.visibilite_moyenne != null ? (d.visibilite_moyenne * 100).toFixed(0) + " %" : "- %") +
+                    "</td></tr>"
                 )
             })
             .join("")

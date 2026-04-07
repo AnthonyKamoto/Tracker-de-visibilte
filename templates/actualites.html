@@ -234,7 +234,7 @@
     <section class="section-faq" id="faq" data-contenu-id="faq-section" data-type-contenu="faq">
         <h2 class="titre-section">Questions fréquentes</h2>
         <div class="faq-item" data-contenu-id="faq-q1" data-type-contenu="faq-item">
-            <div class="faq-question" role="button" tabindex="0">
+            <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                 Comment fonctionne le système de mesure de visibilité ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -243,7 +243,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q2" data-type-contenu="faq-item">
-            <div class="faq-question" role="button" tabindex="0">
+            <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                 Quelles données sont collectées par le tracker ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -252,7 +252,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q3" data-type-contenu="faq-item">
-            <div class="faq-question" role="button" tabindex="0">
+            <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                 Le tracking ralentit-il la page ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -261,7 +261,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q4" data-type-contenu="faq-item">
-            <div class="faq-question" role="button" tabindex="0">
+            <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                 Où puis-je consulter les résultats de visibilité ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -270,7 +270,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q5" data-type-contenu="faq-item">
-            <div class="faq-question" role="button" tabindex="0">
+            <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                 Le système fonctionne-t-il sur mobile ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -346,12 +346,16 @@
     // FAQ
     document.querySelectorAll('.faq-question').forEach(function (btn) {
         btn.addEventListener('click', function () {
-            this.closest('.faq-item').classList.toggle('ouvert');
+            var item = this.closest('.faq-item');
+            item.classList.toggle('ouvert');
+            this.setAttribute('aria-expanded', item.classList.contains('ouvert'));
         });
         btn.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                this.closest('.faq-item').classList.toggle('ouvert');
+                var item = this.closest('.faq-item');
+                item.classList.toggle('ouvert');
+                this.setAttribute('aria-expanded', item.classList.contains('ouvert'));
             }
         });
     });
@@ -361,9 +365,13 @@
     var msgNewsletter = document.getElementById('newsletter-message');
     formNewsletter.addEventListener('submit', function () {
         var email = document.getElementById('newsletter-email').value.trim();
+        var emailValide = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         if (!email) {
             msgNewsletter.style.color = 'var(--rouge)';
             msgNewsletter.textContent = 'Veuillez saisir votre adresse email.';
+        } else if (!emailValide) {
+            msgNewsletter.style.color = 'var(--rouge)';
+            msgNewsletter.textContent = 'Veuillez saisir une adresse email valide.';
         } else {
             msgNewsletter.style.color = '#4ade80';
             msgNewsletter.textContent = 'Merci ! Vous serez notifié(e) des prochaines publications.';

@@ -133,6 +133,7 @@ python dashboard/appli.py
     📁 donnees/                               # Base de donnees SQLite (cree automatiquement)
         🗄️ visibilite.db
     📁 tests/                                 # 42 tests unitaires (pytest)
+        🐍 conftest.py                       # Configuration partagee des tests
         🐍 test_base_de_donnees.py            # Tests du module BDD (7 tests)
         🐍 test_routes_collecte.py            # Tests des routes de collecte (17 tests)
         🐍 test_routes_statistiques.py        # Tests des routes de statistiques (9 tests)

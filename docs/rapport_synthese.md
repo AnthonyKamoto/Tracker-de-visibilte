@@ -67,7 +67,7 @@ Le systeme repose sur une architecture en trois couches :
 
 - Fichier unique `donnees/visibilite.db` cree automatiquement.
 - Deux tables : `sessions` et `evenements_visibilite` reliees par cle etrangere.
-- Index sur `id_contenu` et `id_session` pour accelerer les requetes.
+- Index sur `id_contenu`, `id_session`, `date_enregistrement` et `date_debut` pour accelerer les requetes.
 
 ---
 

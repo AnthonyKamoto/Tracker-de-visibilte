@@ -15,15 +15,13 @@ def _clause_date(date_debut=None, date_fin=None, colonne="e.date_enregistrement"
     conditions = []
     parametres = []
     if date_debut:
-        if not _FORMAT_DATE.match(date_debut):
-            return conditions, parametres
-        conditions.append(f"{colonne} >= ?")
-        parametres.append(date_debut)
+        if _FORMAT_DATE.match(date_debut):
+            conditions.append(f"{colonne} >= ?")
+            parametres.append(date_debut)
     if date_fin:
-        if not _FORMAT_DATE.match(date_fin):
-            return conditions, parametres
-        conditions.append(f"{colonne} <= ?")
-        parametres.append(date_fin + " 23:59:59")
+        if _FORMAT_DATE.match(date_fin):
+            conditions.append(f"{colonne} <= ?")
+            parametres.append(date_fin + " 23:59:59")
     return conditions, parametres
 
 

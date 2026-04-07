@@ -64,6 +64,14 @@ def creer_nouvelle_session():
     if erreur:
         return jsonify({'succes': False, 'erreur': erreur}), 400
 
+    erreur = _valider_chaine(donnees.get('navigateur'), 'navigateur')
+    if erreur:
+        return jsonify({'succes': False, 'erreur': erreur}), 400
+
+    erreur = _valider_chaine(donnees.get('page_consultee'), 'page_consultee')
+    if erreur:
+        return jsonify({'succes': False, 'erreur': erreur}), 400
+
     # Vérifier si la session existe déjà
     if obtenir_session(donnees['id_session']):
         return jsonify({'succes': True, 'id_session': donnees['id_session'], 'message': 'Session existante'}), 200
@@ -115,9 +123,15 @@ def enregistrer_evenements():
         if erreur:
             return jsonify({'succes': False, 'erreur': erreur}), 400
         pv = evt['pourcentage_visibilite']
-        if not isinstance(pv, (int, float)) or pv < 0 or pv > 1:
+        if isinstance(pv, bool) or not isinstance(pv, (int, float)) or pv < 0 or pv > 1:
             return jsonify({'succes': False, 'erreur': 'pourcentage_visibilite doit être entre 0 et 1'}), 400
         erreur = _valider_entier(evt.get('duree_exposition_ms'), 'duree_exposition_ms')
+        if erreur:
+            return jsonify({'succes': False, 'erreur': erreur}), 400
+        erreur = _valider_chaine(evt.get('horodatage_debut'), 'horodatage_debut')
+        if erreur:
+            return jsonify({'succes': False, 'erreur': erreur}), 400
+        erreur = _valider_chaine(evt.get('horodatage_fin'), 'horodatage_fin')
         if erreur:
             return jsonify({'succes': False, 'erreur': erreur}), 400
 

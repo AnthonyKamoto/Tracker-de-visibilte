@@ -3,10 +3,10 @@
 ## 1. Vue d'ensemble
 
 Le systeme de mesure de visibilite web de la Fondation CCC est une application
-trois-couches concue pour detecter, collecter et analyser la visibilite des
+quatre-couches concue pour detecter, collecter et analyser la visibilite des
 contenus affiches dans le navigateur d'un visiteur.
 
-Les trois couches sont les suivantes :
+Les quatre couches sont les suivantes :
 
 | Couche | Role | Technologies |
 |--------|------|--------------|

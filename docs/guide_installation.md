@@ -137,7 +137,7 @@ python -m pytest tests/ -v
 Resultat attendu :
 
 ```
-tests/test_analyseur.py ............                    [  6 passed]
+tests/test_analyseur.py ......                         [  6 passed]
 tests/test_base_de_donnees.py .......                   [  7 passed]
 tests/test_dashboard.py ...                             [  3 passed]
 tests/test_routes_collecte.py .................          [ 17 passed]

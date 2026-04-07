@@ -52,6 +52,8 @@ echo "Appuyez sur Ctrl+C pour arreter les deux serveurs."
 echo ""
 
 # Attendre que l'un des deux s'arrete
-wait -n "$PID_SERVEUR" "$PID_DASHBOARD" 2>/dev/null
+while kill -0 "$PID_SERVEUR" 2>/dev/null && kill -0 "$PID_DASHBOARD" 2>/dev/null; do
+    sleep 1
+done
 echo "[INFO] Un des serveurs s'est arrete."
 arreter
