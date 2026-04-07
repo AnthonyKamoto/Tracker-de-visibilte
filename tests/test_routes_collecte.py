@@ -9,7 +9,6 @@ import json
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import pytest
-from serveur.appli import creer_application
 
 
 def test_creer_session(client):
@@ -206,7 +205,6 @@ def test_obtenir_session_inexistante(client):
 
 def test_envoi_sendbeacon(client):
     """Les donnees envoyees via sendBeacon (Content-Type text/plain) doivent fonctionner."""
-    import json
     client.post('/api/sessions', json={
         'id_session': 'test-beacon',
         'type_appareil': 'mobile'

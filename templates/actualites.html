@@ -234,7 +234,7 @@
     <section class="section-faq" id="faq" data-contenu-id="faq-section" data-type-contenu="faq">
         <h2 class="titre-section">Questions fréquentes</h2>
         <div class="faq-item" data-contenu-id="faq-q1" data-type-contenu="faq-item">
-            <div class="faq-question">
+            <div class="faq-question" role="button" tabindex="0">
                 Comment fonctionne le système de mesure de visibilité ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -243,7 +243,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q2" data-type-contenu="faq-item">
-            <div class="faq-question">
+            <div class="faq-question" role="button" tabindex="0">
                 Quelles données sont collectées par le tracker ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -252,7 +252,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q3" data-type-contenu="faq-item">
-            <div class="faq-question">
+            <div class="faq-question" role="button" tabindex="0">
                 Le tracking ralentit-il la page ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -261,7 +261,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q4" data-type-contenu="faq-item">
-            <div class="faq-question">
+            <div class="faq-question" role="button" tabindex="0">
                 Où puis-je consulter les résultats de visibilité ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -270,7 +270,7 @@
             </div>
         </div>
         <div class="faq-item" data-contenu-id="faq-q5" data-type-contenu="faq-item">
-            <div class="faq-question">
+            <div class="faq-question" role="button" tabindex="0">
                 Le système fonctionne-t-il sur mobile ?
                 <span class="faq-chevron">&#9660;</span>
             </div>
@@ -347,6 +347,12 @@
     document.querySelectorAll('.faq-question').forEach(function (btn) {
         btn.addEventListener('click', function () {
             this.closest('.faq-item').classList.toggle('ouvert');
+        });
+        btn.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this.closest('.faq-item').classList.toggle('ouvert');
+            }
         });
     });
 

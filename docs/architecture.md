@@ -274,7 +274,7 @@ Les éléments HTML doivent porter les attributs `data-contenu-id` (identifiant 
 |-- 📁 donnees/                        # Base de donnees SQLite (generee au lancement)
 |   |-- 🗄️ visibilite.db
 |
-|-- 📁 tests/                          # Tests automatises (pytest, 30 tests)
+|-- 📁 tests/                          # Tests automatises (pytest, 42 tests)
 |   |-- 🐍 conftest.py                 # Configuration partagee des tests
 |   |-- 🐍 test_base_de_donnees.py     # Tests de la couche base de donnees
 |   |-- 🐍 test_routes_collecte.py     # Tests des routes de collecte

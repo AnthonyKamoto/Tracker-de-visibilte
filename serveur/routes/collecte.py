@@ -18,13 +18,15 @@ TAILLE_MAX_LOT = 500
 
 
 def _valider_chaine(valeur, nom_champ, obligatoire=False):
-    """Vérifie qu'une valeur est une chaîne valide."""
+    """Vérifie qu'une valeur est une chaîne valide et non vide si obligatoire."""
     if valeur is None:
         if obligatoire:
             return f"Champ requis manquant : {nom_champ}"
         return None
     if not isinstance(valeur, str) or len(valeur) > TAILLE_MAX_CHAINE:
         return f"Champ invalide : {nom_champ}"
+    if obligatoire and len(valeur.strip()) == 0:
+        return f"Champ requis manquant : {nom_champ}"
     return None
 
 
@@ -89,6 +91,10 @@ def enregistrer_evenements():
     if 'id_session' not in donnees:
         return jsonify({'succes': False, 'erreur': 'Champ requis manquant : id_session'}), 400
 
+    erreur = _valider_chaine(donnees.get('id_session'), 'id_session', obligatoire=True)
+    if erreur:
+        return jsonify({'succes': False, 'erreur': erreur}), 400
+
     evenements = donnees.get('evenements', [])
     if not evenements:
         return jsonify({'succes': False, 'erreur': 'Aucun événement fourni'}), 400
@@ -111,6 +117,9 @@ def enregistrer_evenements():
         pv = evt['pourcentage_visibilite']
         if not isinstance(pv, (int, float)) or pv < 0 or pv > 1:
             return jsonify({'succes': False, 'erreur': 'pourcentage_visibilite doit être entre 0 et 1'}), 400
+        erreur = _valider_entier(evt.get('duree_exposition_ms'), 'duree_exposition_ms')
+        if erreur:
+            return jsonify({'succes': False, 'erreur': erreur}), 400
 
     # Vérifier que la session existe avant l'insertion (clé étrangère)
     if not obtenir_session(donnees['id_session']):

@@ -62,7 +62,7 @@ const CollecteurDonnees = (function () {
      * Envoie le contenu du tampon au serveur via fetch.
      */
     async function envoyerLot() {
-        if (tampon.length === 0) return;
+        if (tampon.length === 0 || !sessionCreee) return;
 
         const evenementsAEnvoyer = [...tampon];
         tampon = [];
@@ -91,7 +91,7 @@ const CollecteurDonnees = (function () {
      * sendBeacon est le seul mécanisme fiable dans beforeunload/visibilitychange.
      */
     function envoyerAvantFermeture() {
-        if (tampon.length === 0) return;
+        if (tampon.length === 0 || !sessionCreee) return;
 
         var succes = navigator.sendBeacon(
             URL_API + '/api/evenements',

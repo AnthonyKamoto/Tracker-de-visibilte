@@ -106,7 +106,7 @@ Le prototype est **fonctionnel au niveau 2** (application complete avec interfac
 - **Filtre par plage de dates** : le tableau de bord permet de filtrer les donnees affichees selon une periode.
 - **Rafraichissement automatique** : le dashboard dispose d'un toggle pour actualiser les donnees toutes les 10 secondes.
 - **Indicateur de connexion** : le dashboard affiche l'etat de connexion au serveur principal en temps reel.
-- **30 tests unitaires** : couverture des 5 modules principaux (base de donnees, collecte, statistiques, analyseur, dashboard), tous passent avec succes.
+- **42 tests unitaires** : couverture des 5 modules principaux (base de donnees, collecte, statistiques, analyseur, dashboard), tous passent avec succes.
 - **API REST complete** : 7 endpoints couvrant la collecte et la restitution des donnees.
 - **Multiplateforme** : le projet fonctionne sur Windows, macOS et Linux. Des scripts de lancement (`lancer.ps1`, `lancer.sh`) permettent de demarrer les deux serveurs en une commande.
 
@@ -114,4 +114,4 @@ Le prototype est **fonctionnel au niveau 2** (application complete avec interfac
 
 ## Conclusion
 
-Ce projet demontre la faisabilite d'un systeme de mesure de visibilite de contenus Web, du front-end au stockage en base de donnees, avec restitution graphique. Le prototype couvre l'ensemble du flux de donnees : detection par IntersectionObserver, collecte via API REST, stockage SQLite et affichage sur un tableau de bord interactif independant. L'architecture separee (site + dashboard) illustre une conception modulaire proche des pratiques professionnelles. Les 30 tests unitaires garantissent la fiabilite des composants principaux.
+Ce projet demontre la faisabilite d'un systeme de mesure de visibilite de contenus Web, du front-end au stockage en base de donnees, avec restitution graphique. Le prototype couvre l'ensemble du flux de donnees : detection par IntersectionObserver, collecte via API REST, stockage SQLite et affichage sur un tableau de bord interactif independant. L'architecture separee (site + dashboard) illustre une conception modulaire proche des pratiques professionnelles. Les 42 tests unitaires garantissent la fiabilite des composants principaux.

@@ -26,7 +26,7 @@ Ce systeme mesure la visibilite reelle des contenus affiches sur une page web : 
 | Graphiques      | Chart.js                   |
 | Templates       | Jinja2                     |
 | CORS            | Flask-CORS                 |
-| Tests           | pytest (30 tests)          |
+| Tests           | pytest (42 tests)          |
 
 ---
 
@@ -132,10 +132,10 @@ python dashboard/appli.py
             ⚡ informations_contexte.js       # Detection appareil/navigateur
     📁 donnees/                               # Base de donnees SQLite (cree automatiquement)
         🗄️ visibilite.db
-    📁 tests/                                 # 30 tests unitaires (pytest)
+    📁 tests/                                 # 42 tests unitaires (pytest)
         🐍 test_base_de_donnees.py            # Tests du module BDD (7 tests)
-        🐍 test_routes_collecte.py            # Tests des routes de collecte (7 tests)
-        🐍 test_routes_statistiques.py        # Tests des routes de statistiques (7 tests)
+        🐍 test_routes_collecte.py            # Tests des routes de collecte (17 tests)
+        🐍 test_routes_statistiques.py        # Tests des routes de statistiques (9 tests)
         🐍 test_analyseur.py                  # Tests de l'analyseur (6 tests)
         🐍 test_dashboard.py                  # Tests du dashboard (3 tests)
     📁 docs/
@@ -156,7 +156,7 @@ python dashboard/appli.py
 python -m pytest tests/ -v
 ```
 
-30 tests couvrant : base de donnees (7), routes de collecte (7), routes de statistiques (7), analyseur (6), dashboard (3).
+42 tests couvrant : base de donnees (7), routes de collecte (17), routes de statistiques (9), analyseur (6), dashboard (3).
 
 ---
 

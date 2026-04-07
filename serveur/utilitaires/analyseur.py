@@ -2,7 +2,12 @@
 Fonctions de calcul statistique sur les données de visibilité.
 """
 
+import re
+
 from serveur.base_de_donnees import obtenir_connexion
+
+# Format attendu : AAAA-MM-JJ
+_FORMAT_DATE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 
 
 def _clause_date(date_debut=None, date_fin=None, colonne="e.date_enregistrement"):
@@ -10,9 +15,13 @@ def _clause_date(date_debut=None, date_fin=None, colonne="e.date_enregistrement"
     conditions = []
     parametres = []
     if date_debut:
+        if not _FORMAT_DATE.match(date_debut):
+            return conditions, parametres
         conditions.append(f"{colonne} >= ?")
         parametres.append(date_debut)
     if date_fin:
+        if not _FORMAT_DATE.match(date_fin):
+            return conditions, parametres
         conditions.append(f"{colonne} <= ?")
         parametres.append(date_fin + " 23:59:59")
     return conditions, parametres

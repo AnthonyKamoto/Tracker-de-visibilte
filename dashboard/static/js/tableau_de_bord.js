@@ -90,7 +90,7 @@
             ds.duree_moyenne_globale_ms,
         )
         document.getElementById("val-visibilite").textContent =
-            ds.visibilite_moyenne_globale
+            ds.visibilite_moyenne_globale != null
                 ? (ds.visibilite_moyenne_globale * 100).toFixed(0) + " %"
                 : "- %"
     }
@@ -189,9 +189,11 @@
         var valeurs = donnees.map(function (d) {
             return d.nombre
         })
+        var couleurs = COULEURS_VIVES.slice(0, etiquettes.length)
         if (graphiqueAppareils) {
             graphiqueAppareils.data.labels = etiquettes
             graphiqueAppareils.data.datasets[0].data = valeurs
+            graphiqueAppareils.data.datasets[0].backgroundColor = couleurs
             graphiqueAppareils.update()
             return
         }
@@ -226,9 +228,11 @@
         var valeurs = donnees.map(function (d) {
             return d.nombre
         })
+        var couleurs = COULEURS.slice(0, etiquettes.length)
         if (graphiqueNavigateurs) {
             graphiqueNavigateurs.data.labels = etiquettes
             graphiqueNavigateurs.data.datasets[0].data = valeurs
+            graphiqueNavigateurs.data.datasets[0].backgroundColor = couleurs
             graphiqueNavigateurs.update()
             return
         }

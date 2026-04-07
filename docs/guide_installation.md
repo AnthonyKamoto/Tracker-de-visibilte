@@ -128,7 +128,7 @@ Le tableau de bord est une application independante qui consomme les API du serv
 
 ## Lancer les tests
 
-Le projet dispose de 30 tests unitaires repartis en 5 modules. Pour les executer :
+Le projet dispose de 42 tests unitaires repartis en 5 modules. Pour les executer :
 
 ```bash
 python -m pytest tests/ -v
@@ -140,10 +140,10 @@ Resultat attendu :
 tests/test_analyseur.py ............                    [  6 passed]
 tests/test_base_de_donnees.py .......                   [  7 passed]
 tests/test_dashboard.py ...                             [  3 passed]
-tests/test_routes_collecte.py .......                   [  7 passed]
-tests/test_routes_statistiques.py .......               [  7 passed]
+tests/test_routes_collecte.py .................          [ 17 passed]
+tests/test_routes_statistiques.py .........              [  9 passed]
 
-========================= 30 passed =========================
+========================= 42 passed =========================
 ```
 
 ---
@@ -169,7 +169,7 @@ Projet_N4_CCC_Anthony_Kamoto/
         css/                          # Feuilles de style du site
         js/                           # Scripts front-end (observateur, collecteur)
     donnees/                          # Base de donnees SQLite (cree au lancement)
-    tests/                            # 30 tests unitaires pytest
+    tests/                            # 42 tests unitaires pytest
     docs/                             # Documentation du projet
     lancer.ps1                        # Script de lancement (Windows)
     lancer.sh                         # Script de lancement (macOS/Linux)

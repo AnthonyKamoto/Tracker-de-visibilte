@@ -19,16 +19,18 @@ if (-Not (Test-Path $venvActivate)) {
 
 & $venvActivate
 
+$pythonVenv = Join-Path $racine "venv\Scripts\python.exe"
+
 # Lancer le serveur principal (port 5000)
 Write-Host "[1/2] Demarrage du serveur d'actualites (port 5000)..." -ForegroundColor Green
-$serveur = Start-Process -FilePath "python" `
+$serveur = Start-Process -FilePath $pythonVenv `
     -ArgumentList "serveur/appli.py" `
     -WorkingDirectory $racine `
     -PassThru -NoNewWindow
 
 # Lancer le dashboard (port 5001)
 Write-Host "[2/2] Demarrage du dashboard (port 5001)..." -ForegroundColor Green
-$dashboard = Start-Process -FilePath "python" `
+$dashboard = Start-Process -FilePath $pythonVenv `
     -ArgumentList "dashboard/appli.py" `
     -WorkingDirectory $racine `
     -PassThru -NoNewWindow
