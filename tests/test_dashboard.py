@@ -30,4 +30,5 @@ def test_url_api_injectee():
     client = appli.test_client()
     reponse = client.get('/')
     html = reponse.data.decode('utf-8')
+    # L'URL est construite dynamiquement a partir de l'hote de la requete
     assert 'http://localhost:5000' in html

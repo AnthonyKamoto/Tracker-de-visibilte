@@ -25,10 +25,8 @@ def creer_application():
     )
 
     # Activer CORS pour permettre au dashboard de communiquer avec le serveur
-    CORS(appli, resources={r"/api/*": {"origins": [
-        "http://localhost:5001",
-        "http://127.0.0.1:5001"
-    ]}})
+    # Origines ouvertes : le dashboard peut etre accede depuis le reseau local
+    CORS(appli, resources={r"/api/*": {"origins": "*"}})
 
     # Initialiser la base de donnees au demarrage
     initialiser_bdd()

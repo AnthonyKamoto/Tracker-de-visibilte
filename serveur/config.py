@@ -11,7 +11,7 @@ REPERTOIRE_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHEMIN_BDD = os.path.join(REPERTOIRE_BASE, 'donnees', 'visibilite.db')
 
 # Configuration du serveur
-HOTE = '127.0.0.1'
+HOTE = '0.0.0.0'
 PORT = 5000
 MODE_DEBUG = False
 
