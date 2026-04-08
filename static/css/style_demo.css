@@ -852,7 +852,7 @@ img { display: block; max-width: 100%; transition: transform 0.4s ease; }
     .entete .conteneur { flex-wrap: wrap; }
     .logo { font-size: 1.4rem; }
 
-    .btn-menu { display: flex; }
+    .btn-menu { display: flex; margin-left: auto; }
 
     .nav-liens {
         display: none;
