@@ -22,7 +22,7 @@ Ce projet propose un systeme capable de :
 
 ## Architecture du systeme
 
-Le systeme repose sur une architecture en trois couches :
+Le systeme repose sur une architecture en quatre couches :
 
 ```
  Navigateur (Front-end)          Serveur (Back-end)           Stockage

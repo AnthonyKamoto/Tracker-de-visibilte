@@ -128,9 +128,6 @@ const CollecteurDonnees = (function () {
         // Envoi périodique toutes les 3 secondes
         setInterval(envoyerLot, INTERVALLE_ENVOI_MS);
 
-        // Envoi des données restantes à la fermeture de la page
-        window.addEventListener('beforeunload', envoyerAvantFermeture);
-
         // Envoi lorsque l'onglet devient masqué (changement d'onglet, alt-tab, etc.)
         document.addEventListener('visibilitychange', function () {
             if (document.visibilityState === 'hidden') {
@@ -143,6 +140,7 @@ const CollecteurDonnees = (function () {
         initialiser,
         ajouterEvenement,
         envoyerLot,
+        envoyerAvantFermeture,
         obtenirIdSession: function () { return idSession; }
     };
 

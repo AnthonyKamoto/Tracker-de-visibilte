@@ -404,12 +404,21 @@
                 mettreAJourGraphiqueVues(repContenus.donnees)
                 mettreAJourTableau(repContenus.donnees)
             } else {
+                mettreAJourGraphiqueVisibilite([])
+                mettreAJourGraphiqueDuree([])
+                mettreAJourGraphiqueVues([])
                 mettreAJourTableau([])
             }
-            if (repAppareils.succes && repAppareils.donnees.length > 0)
+            if (repAppareils.succes && repAppareils.donnees.length > 0) {
                 mettreAJourGraphiqueAppareils(repAppareils.donnees)
-            if (repNavigateurs.succes && repNavigateurs.donnees.length > 0)
+            } else {
+                mettreAJourGraphiqueAppareils([])
+            }
+            if (repNavigateurs.succes && repNavigateurs.donnees.length > 0) {
                 mettreAJourGraphiqueNavigateurs(repNavigateurs.donnees)
+            } else {
+                mettreAJourGraphiqueNavigateurs([])
+            }
         } catch (erreur) {
             console.error("[CCC Dashboard] Erreur :", erreur)
             mettreAJourBadgeConnexion(false)
