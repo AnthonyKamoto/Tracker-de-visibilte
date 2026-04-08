@@ -5,8 +5,20 @@
 
 const CollecteurDonnees = (function () {
 
+    // Generateur UUID v4 compatible HTTP (pas besoin de contexte securise)
+    function genererUUID() {
+        // crypto.randomUUID() necessite HTTPS ; fallback pour HTTP sur reseau local
+        if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+            try { return crypto.randomUUID(); } catch (e) { /* contexte non securise */ }
+        }
+        // Fallback : UUID v4 via getRandomValues (fonctionne sur HTTP)
+        return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, function (c) {
+            return (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16);
+        });
+    }
+
     // Identifiant unique de session (UUID v4)
-    const idSession = crypto.randomUUID();
+    const idSession = genererUUID();
 
     // Tampon d'événements en attente d'envoi
     let tampon = [];
