@@ -54,6 +54,7 @@ Le systeme repose sur une architecture en quatre couches :
 - **appli.py** : point d'entree de l'application Flask, enregistre les blueprints et active CORS.
 - **routes/collecte.py** : endpoints `POST /api/sessions` et `POST /api/evenements` pour recevoir les donnees du front-end.
 - **routes/statistiques.py** : endpoints `GET /api/statistiques/*` pour fournir les donnees au tableau de bord.
+- **routes/exportation.py** : endpoints `GET /api/exportation/xlsx` et `GET /api/exportation/csv` pour exporter les statistiques en fichiers Excel et CSV.
 - **routes/pages.py** : sert le site d'actualites (`/actualites`).
 - **utilitaires/analyseur.py** : fonctions de calcul de statistiques (moyennes, repartitions, resumes).
 - **base_de_donnees.py** : initialisation et connexion a la base de donnees SQLite.
@@ -77,6 +78,7 @@ Le systeme repose sur une architecture en quatre couches :
 |------------------|--------------------------|---------------------------------------------------|
 | Langage serveur  | Python 3.10+             | Logique metier et API                              |
 | Framework web    | Flask + Flask-CORS         | Serveur HTTP, routage REST et gestion CORS         |
+| Export donnees   | openpyxl                   | Generation de fichiers Excel (XLSX)                |
 | Base de donnees  | SQLite                   | Stockage leger des sessions et evenements          |
 | Detection visibilite | IntersectionObserver (API Web) | Detection de la visibilite dans le viewport   |
 | Graphiques       | Chart.js                 | Visualisation des statistiques dans le dashboard   |
@@ -106,12 +108,13 @@ Le prototype est **fonctionnel au niveau 2** (application complete avec interfac
 - **Filtre par plage de dates** : le tableau de bord permet de filtrer les donnees affichees selon une periode.
 - **Rafraichissement automatique** : le dashboard dispose d'un toggle pour actualiser les donnees toutes les 10 secondes.
 - **Indicateur de connexion** : le dashboard affiche l'etat de connexion au serveur principal en temps reel.
-- **42 tests unitaires** : couverture des 5 modules principaux (base de donnees, collecte, statistiques, analyseur, dashboard), tous passent avec succes.
-- **API REST complete** : 7 endpoints couvrant la collecte et la restitution des donnees.
+- **Export des donnees** : le dashboard permet d'exporter toutes les statistiques en fichiers Excel (XLSX) ou CSV via deux boutons dedies. L'export genere un tableau croise unique (une ligne par contenu, colonnes dynamiques par type d'appareil et navigateur). Les fichiers sont sauvegardes dans `exports/` et ecrases a chaque export. Les filtres de date s'appliquent.
+- **Tests unitaires** : couverture des modules principaux (base de donnees, collecte, statistiques, exportation, analyseur, dashboard), tous passent avec succes.
+- **API REST complete** : 9 endpoints couvrant la collecte, la restitution et l'exportation des donnees.
 - **Multiplateforme** : le projet fonctionne sur Windows, macOS et Linux. Des scripts de lancement (`lancer.ps1`, `lancer.sh`) permettent de demarrer les deux serveurs en une commande.
 
 ---
 
 ## Conclusion
 
-Ce projet demontre la faisabilite d'un systeme de mesure de visibilite de contenus Web, du front-end au stockage en base de donnees, avec restitution graphique. Le prototype couvre l'ensemble du flux de donnees : detection par IntersectionObserver, collecte via API REST, stockage SQLite et affichage sur un tableau de bord interactif independant. L'architecture separee (site + dashboard) illustre une conception modulaire proche des pratiques professionnelles. Les 42 tests unitaires garantissent la fiabilite des composants principaux.
+Ce projet demontre la faisabilite d'un systeme de mesure de visibilite de contenus Web, du front-end au stockage en base de donnees, avec restitution graphique et exportation des donnees. Le prototype couvre l'ensemble du flux de donnees : detection par IntersectionObserver, collecte via API REST, stockage SQLite, affichage sur un tableau de bord interactif independant et export en Excel/CSV. L'architecture separee (site + dashboard) illustre une conception modulaire proche des pratiques professionnelles. Les tests unitaires garantissent la fiabilite des composants principaux.

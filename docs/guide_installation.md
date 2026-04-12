@@ -75,6 +75,7 @@ Les dependances du projet sont :
 - **flask** : framework web leger pour le serveur HTTP et l'API REST
 - **flask-cors** : gestion des requetes cross-origin entre le site et le dashboard
 - **pytest** : framework de tests unitaires
+- **openpyxl** : generation de fichiers Excel (XLSX) pour l'export des donnees
 
 ### 4. Lancer les serveurs
 
@@ -124,11 +125,15 @@ Le site d'actualites est une page complete de type journal en ligne avec 21 elem
 
 Le tableau de bord est une application independante qui consomme les API du serveur principal. Il affiche les statistiques collectees sous forme de graphiques interactifs (Chart.js) : visibilite moyenne par contenu, duree d'exposition, repartition par appareil et navigateur. Il dispose d'un indicateur de connexion au serveur et d'un mode de rafraichissement automatique (toutes les 10 secondes).
 
+### Exportation des donnees
+
+Le tableau de bord propose deux boutons d'export (Excel et CSV) dans la barre de filtres. L'export genere un tableau croise unique contenant les statistiques par contenu avec des colonnes dynamiques par type d'appareil et par navigateur. Les fichiers sont sauvegardes dans le dossier `exports/` a la racine du projet (ecrases a chaque nouvel export). Les filtres de date du dashboard s'appliquent aux exports.
+
 ---
 
 ## Lancer les tests
 
-Le projet dispose de 42 tests unitaires repartis en 5 modules. Pour les executer :
+Le projet dispose de tests unitaires repartis en plusieurs modules. Pour les executer :
 
 ```bash
 python -m pytest tests/ -v
@@ -137,13 +142,7 @@ python -m pytest tests/ -v
 Resultat attendu :
 
 ```
-tests/test_analyseur.py ......                         [  6 passed]
-tests/test_base_de_donnees.py .......                   [  7 passed]
-tests/test_dashboard.py ...                             [  3 passed]
-tests/test_routes_collecte.py .................          [ 17 passed]
-tests/test_routes_statistiques.py .........              [  9 passed]
-
-========================= 42 passed =========================
+========================= all passed =========================
 ```
 
 ---
@@ -157,7 +156,7 @@ Projet_N4_CCC_Anthony_Kamoto/
         config.py                     # Configuration (port, chemin BDD)
         base_de_donnees.py            # Initialisation SQLite
         modeles/                      # Modeles de donnees (session, evenement)
-        routes/                       # Routes API (collecte, statistiques, pages)
+        routes/                       # Routes API (collecte, statistiques, exportation, pages)
         utilitaires/                  # Analyseur de statistiques
     dashboard/                        # Dashboard independant (port 5001)
         appli.py                      # Point d'entree Flask du dashboard
@@ -169,7 +168,8 @@ Projet_N4_CCC_Anthony_Kamoto/
         css/                          # Feuilles de style du site
         js/                           # Scripts front-end (observateur, collecteur)
     donnees/                          # Base de donnees SQLite (cree au lancement)
-    tests/                            # 42 tests unitaires pytest
+    exports/                          # Fichiers d'export generes (XLSX, CSV)
+    tests/                            # Tests unitaires pytest
     docs/                             # Documentation du projet
     lancer.ps1                        # Script de lancement (Windows)
     lancer.sh                         # Script de lancement (macOS/Linux)

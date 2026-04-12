@@ -186,6 +186,33 @@ body {
     background: #283593;
 }
 
+/* Boutons d'exportation */
+.groupe-exportation {
+    display: flex;
+    gap: 8px;
+}
+
+.bouton-export {
+    background: #2d6a4f;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.bouton-export:hover {
+    background: #40916c;
+}
+
 /* Conteneur principal */
 .conteneur-dashboard {
     max-width: 1200px;
@@ -525,6 +552,19 @@ body {
         width: 100%;
         justify-content: center;
         padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+    }
+
+    .groupe-exportation {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .groupe-exportation .bouton-export {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 16px;
         border-radius: 8px;
         font-size: 0.9rem;
     }

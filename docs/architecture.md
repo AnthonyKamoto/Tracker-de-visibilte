@@ -61,7 +61,13 @@ Les quatre couches sont les suivantes :
 |  +--------------------+   |     appareils               |     |
 |  | Utilitaires        |   |     navigateurs             |     |
 |  | - analyseur.py     |   +-----------------------------+     |
-|  +--------------------+          CORS active                  |
+|  +--------------------+                                       |
+|                           +-----------------------------+     |
+|                           | Routes exportation (API)    |     |
+|                           | GET /api/exportation/xlsx   |     |
+|                           | GET /api/exportation/csv    |     |
+|                           +-----------------------------+     |
+|                                  CORS active                  |
 +-------------------------------|-------------------------------+
                                 |
               Lecture / Ecriture |         HTTP GET (JSON + CORS)
@@ -85,6 +91,8 @@ Les quatre couches sont les suivantes :
                           |   (Chart.js)                 |
                           | - Rafraichissement auto      |
                           | - Indicateur de connexion    |
+                          | - Export des donnees (XLSX,  |
+                          |   CSV) via l'API serveur     |
                           +------------------------------+
 ```
 
@@ -163,6 +171,17 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
     et camembert (navigateurs). Un tableau HTML recapitulatif est egalement
     rempli dynamiquement.
 
+### 3.5 Exportation (dashboard vers fichier)
+
+11. **Export des donnees** -- Le dashboard propose deux boutons d'exportation
+    (Excel et CSV). Les boutons declenchent un telechargement via les endpoints
+    `GET /api/exportation/xlsx` et `GET /api/exportation/csv` du serveur
+    principal. Le serveur construit un tableau croise unique (une ligne par
+    contenu, avec colonnes dynamiques par type d'appareil et par navigateur)
+    en joignant les tables `evenements_visibilite` et `sessions`. Les fichiers
+    sont sauvegardes dans le dossier `exports/` (ecrases a chaque export) et
+    retournes en telechargement. Les filtres de date du dashboard s'appliquent.
+
 ---
 
 ## 4. Technologies utilisees
@@ -184,6 +203,7 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 | **Python 3.10+** | Langage du serveur |
 | **Flask 3.x** | Framework web -- routage, blueprints, JSON, templates Jinja2 |
 | **Flask-CORS** | Gestion des requetes cross-origin (CORS) pour la communication entre le site et le dashboard |
+| **openpyxl** | Generation de fichiers Excel (XLSX) pour l'export des statistiques |
 
 ### Base de donnees
 
@@ -195,7 +215,7 @@ navigateur jusqu'a l'affichage dans le tableau de bord.
 
 | Technologie | Utilisation |
 |-------------|-------------|
-| **pytest** | Tests unitaires et d'integration couvrant la base de donnees, les routes de collecte, les routes de statistiques et le module d'analyse |
+| **pytest** | Tests unitaires et d'integration couvrant la base de donnees, les routes de collecte, les routes de statistiques, les routes d'exportation et le module d'analyse |
 
 ---
 
@@ -242,6 +262,7 @@ Les éléments HTML doivent porter les attributs `data-contenu-id` (identifiant 
 |   |   |-- 🐍 pages.py                # Routes HTML : /, /actualites
 |   |   |-- 🐍 collecte.py             # API collecte : /api/sessions, /api/evenements
 |   |   |-- 🐍 statistiques.py         # API stats : /api/statistiques/*
+|   |   |-- 🐍 exportation.py          # API export : /api/exportation/xlsx, /api/exportation/csv
 |   |
 |   |-- 📁 utilitaires/                # Fonctions transversales
 |       |-- 🐍 __init__.py
@@ -274,11 +295,14 @@ Les éléments HTML doivent porter les attributs `data-contenu-id` (identifiant 
 |-- 📁 donnees/                        # Base de donnees SQLite (generee au lancement)
 |   |-- 🗄️ visibilite.db
 |
-|-- 📁 tests/                          # Tests automatises (pytest, 42 tests)
+|-- 📁 exports/                        # Fichiers d'export generes (XLSX, CSV, non suivis par git)
+|
+|-- 📁 tests/                          # Tests automatises (pytest)
 |   |-- 🐍 conftest.py                 # Configuration partagee des tests
 |   |-- 🐍 test_base_de_donnees.py     # Tests de la couche base de donnees
 |   |-- 🐍 test_routes_collecte.py     # Tests des routes de collecte
 |   |-- 🐍 test_routes_statistiques.py # Tests des routes de statistiques
+|   |-- 🐍 test_routes_exportation.py  # Tests des routes d'exportation
 |   |-- 🐍 test_analyseur.py           # Tests du module d'analyse
 |   |-- 🐍 test_dashboard.py           # Tests du dashboard
 |
@@ -290,5 +314,5 @@ Les éléments HTML doivent porter les attributs `data-contenu-id` (identifiant 
 |
 |-- 🪟 lancer.ps1                      # Script de lancement (Windows)
 |-- 🐧 lancer.sh                       # Script de lancement (macOS/Linux)
-|-- 📋 requirements.txt                # Dependances Python (flask, flask-cors, pytest)
+|-- 📋 requirements.txt                # Dependances Python (flask, flask-cors, pytest, openpyxl)
 ```

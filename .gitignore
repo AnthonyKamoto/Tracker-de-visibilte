@@ -18,5 +18,8 @@ Thumbs.db
 # pytest
 .pytest_cache/
 
+# Exports
+exports/
+
 # Outils
 .claude/

@@ -361,6 +361,15 @@
         afficherTableau()
     }
 
+    function mettreAJourLiensExportation() {
+        if (!URL_API) return
+        var params = obtenirParametresDate()
+        var btnXlsx = document.getElementById("btn-export-xlsx")
+        var btnCsv = document.getElementById("btn-export-csv")
+        if (btnXlsx) btnXlsx.href = URL_API + "/api/exportation/xlsx" + params
+        if (btnCsv) btnCsv.href = URL_API + "/api/exportation/csv" + params
+    }
+
     async function chargerDonnees() {
         var params = obtenirParametresDate()
         try {
@@ -396,6 +405,7 @@
             var repNavigateurs = resultats[3]
 
             mettreAJourBadgeConnexion(true)
+            mettreAJourLiensExportation()
 
             if (repSessions.succes) mettreAJourCartes(repSessions.donnees)
             if (repContenus.succes && repContenus.donnees.length > 0) {
@@ -454,4 +464,9 @@
     })
 
     chargerDonnees()
+    mettreAJourLiensExportation()
+
+    // Mettre a jour les liens d'export quand les dates changent
+    document.getElementById("date-debut").addEventListener("change", mettreAJourLiensExportation)
+    document.getElementById("date-fin").addEventListener("change", mettreAJourLiensExportation)
 })()

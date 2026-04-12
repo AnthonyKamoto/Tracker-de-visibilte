@@ -35,10 +35,12 @@ def creer_application():
     from serveur.routes.pages import pages_bp
     from serveur.routes.collecte import collecte_bp
     from serveur.routes.statistiques import statistiques_bp
+    from serveur.routes.exportation import exportation_bp
 
     appli.register_blueprint(pages_bp)
     appli.register_blueprint(collecte_bp)
     appli.register_blueprint(statistiques_bp)
+    appli.register_blueprint(exportation_bp)
 
     return appli
 
